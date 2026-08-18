@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WHITE.PHAT.GRAPHICS | ファンの熱狂を、そのままカタチに</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ["'Noto Sans JP'", "'Hiragino Sans'", "sans-serif"],
+        },
+        colors: {
+          brand: {
+            blue: '#589DF2',
+            bluehover: '#3B82F6',
+            bluedark: '#2563EB',
+            navy: '#1E293B',
+            slate: '#64748B',
+            body: '#334155',
+            border: '#E2E8F0',
+            bubble: '#94A3B8',
+            dark: '#18181B',
+          }
+        },
+        borderRadius: {
+          'xl2': '16px',
+        }
+      }
+    }
+  }
+</script>
+<style>
+  html { scroll-behavior: smooth; }
+  body { color: #1E293B; }
+  #contact { scroll-margin-top: 90px; }
+
+  /* ===== Section background gradient (Yellow -> White -> Light Blue, left to right) ===== */
+  .bg-section-gradient {
+    background: linear-gradient(to right, #FEF9C3 0%, #FFFFFF 50%, #E0F2FE 100%);
+  }
+
+  /* ===== CTA main button ===== */
+  .btn-cta {
+    border-radius: 9999px;
+    background-color: #589DF2;
+    box-shadow: 0 4px 14px rgba(88, 157, 242, 0.4);
+    transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    background-color: #3B82F6;
+    filter: brightness(1.05);
+  }
+
+  /* ===== Info card ===== */
+  .info-card {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  /* ===== Speech bubble ===== */
+  .bubble {
+    position: relative;
+    border-radius: 16px;
+    background-color: #FFFFFF;
+    border: 1px solid #94A3B8;
+  }
+  .bubble::after {
+    content: "";
+    position: absolute;
+    bottom: -14px;
+    left: 40px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 14px solid #94A3B8;
+  }
+  .bubble::before {
+    content: "";
+    position: absolute;
+    bottom: -12px;
+    left: 42px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid #FFFFFF;
+    z-index: 1;
+  }
+  .bubble-tip-right::after { left: auto; right: 40px; }
+  .bubble-tip-right::before { left: auto; right: 42px; }
+
+  .bubble-tip-top-left::after {
+    bottom: auto; top: -14px; left: 40px;
+    border-top: none; border-bottom: 14px solid #94A3B8;
+  }
+  .bubble-tip-top-left::before {
+    bottom: auto; top: -12px; left: 42px;
+    border-top: none; border-bottom: 12px solid #FFFFFF;
+  }
+
+  /* ===== Fade-up scroll animation ===== */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== Gallery grid ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .gallery-goods { grid-column: span 2 / span 2; grid-row: span 2 / span 2; }
+  @media (max-width: 767px) {
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-goods { grid-column: span 2 / span 2; grid-row: span 1 / span 1; }
+  }
+  /* Unified tile behavior: every gallery tile fills its grid cell edge-to-edge, no gaps */
+  .gallery-grid > a {
+    display: block;
+    position: relative;
+  }
+  .gallery-grid > a img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
+</head>
+<body class="font-sans text-[#1E293B] antialiased">
+
+<!-- ==================== ① ヘッダー ==================== -->
+<header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur z-50 border-b border-brand-border">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between px-5 py-4 md:py-5">
+    <div class="text-sm md:text-lg font-black tracking-widest text-brand-navy">WHITE.PHAT.GRAPHICS</div>
+    <a href="#contact" class="btn-cta text-white text-xs md:text-base font-bold px-4 py-2.5 md:px-7 md:py-3.5 whitespace-nowrap">
+      無料デザイン診断
+    </a>
+  </div>
+</header>
+<div class="h-[60px] md:h-[80px]"></div>
+
+<!-- ==================== ② ファーストビュー(FV) ==================== -->
+<section class="bg-section-gradient pt-12 pb-16 md:pt-20 md:pb-24 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <p class="fade-up text-base md:text-xl font-bold text-brand-navy mb-3 md:mb-4">
+      ファンの"熱狂"を、そのままカタチに
+    </p>
+    <h1 class="fade-up text-[26px] leading-[1.4] tracking-[0.02em] md:text-[36px] md:leading-[1.4] md:tracking-[0.05em] font-black text-brand-navy mb-6 md:mb-8">
+      大手代理店品質の安心感<br>
+      <span class="text-2xl md:text-4xl">×</span><br>
+      代表直轄の距離感
+    </h1>
+    <p class="fade-up text-lg md:text-2xl font-bold text-brand-navy mb-6 md:mb-8">
+      で生み出すエンタメ特化のクリエイティブ
+    </p>
+    <p class="fade-up text-balance text-sm md:text-[15px] leading-[1.8] font-bold text-brand-navy mb-8 md:mb-10">
+      グラフィックから本格的なアパレル製造、宣伝撮影、特設LP構築まで一気通貫。<br class="hidden md:block">
+      30年にわたりエンタメシーンを支えてきた審美眼で、ファンのロイヤリティと物販収益を最大化します。
+    </p>
+    <div class="fade-up flex items-center justify-center gap-4">
+      <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+        無料デザイン診断
+      </a>
+      <img src="assets/mascot-fv-reading.png" alt="読書するマスコットキャラクター" class="w-20 md:w-32 h-auto">
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ③ 課題提起(ペルソナ共感) ==================== -->
+<section class="bg-white pt-16 pb-16 md:pt-20 md:pb-20 px-5">
+  <div class="max-w-[1080px] mx-auto">
+    <h2 class="fade-up text-2xl leading-[1.5] md:text-[28px] font-bold text-brand-navy text-center mb-6">
+      チープなファングッズの限界<br>感じていませんか?
+    </h2>
+    <p class="fade-up text-sm md:text-[15px] leading-[1.8] font-bold text-brand-navy text-center mb-12 md:mb-16">
+      「売れる物販」には、ファンの熱量をさらに加速させる<br>
+      圧倒的なクオリティが必要です。
+    </p>
+
+    <!-- Mobile: simple stacked layout -->
+    <div class="grid grid-cols-1 gap-y-4 items-end md:hidden">
+      <div class="fade-up bubble bubble-tip-right p-5">
+        <p class="text-sm leading-[1.8] font-bold text-brand-navy">
+          本格的なアパレル(服)を作りたいが、製造に関する知識がない…
+        </p>
+      </div>
+      <div class="fade-up bubble p-5">
+        <p class="text-sm leading-[1.8] font-bold text-brand-navy">
+          グッズがありきたりで、ファンの方が喜ぶものを作れていないかも…
+        </p>
+      </div>
+      <div class="flex justify-center -mt-2">
+        <img src="assets/mascot-problem-grumpy.png" alt="悩むマスコットキャラクター" class="w-40 h-auto">
+      </div>
+      <div class="fade-up bubble bubble-tip-top-left p-5 mt-6">
+        <p class="text-sm leading-[1.8] font-bold text-brand-navy">
+          物販特設LPやSNSの準備、宣伝写真の撮影まで手が回らない…
+        </p>
+      </div>
+    </div>
+
+    <!-- Desktop: triangular layout matching the design, mascot as anchor point -->
+    <div class="hidden md:block relative h-[430px] max-w-[880px] mx-auto">
+      <img src="assets/mascot-problem-grumpy.png" alt="悩むマスコットキャラクター" class="absolute left-1/2 -translate-x-[42%] top-[105px] w-56 h-auto z-10">
+
+      <div class="fade-up bubble bubble-tip-right absolute left-0 top-[30px] w-[320px] p-6">
+        <p class="text-[15px] leading-[1.8] font-bold text-brand-navy">
+          本格的なアパレル(服)を作りたいが、製造に関する知識がない…
+        </p>
+      </div>
+
+      <div class="fade-up bubble absolute right-0 top-0 w-[320px] p-6">
+        <p class="text-[15px] leading-[1.8] font-bold text-brand-navy">
+          グッズがありきたりで、ファンの方が喜ぶものを作れていないかも…
+        </p>
+      </div>
+
+      <div class="fade-up bubble bubble-tip-top-left absolute right-[20px] top-[310px] w-[320px] p-6">
+        <p class="text-[15px] leading-[1.8] font-bold text-brand-navy">
+          物販特設LPやSNSの準備、宣伝写真の撮影まで手が回らない…
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ④a その悩み(サブCTA) ==================== -->
+<section class="bg-white pt-16 pb-16 md:pt-20 md:pb-20 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-8 md:mb-10">
+      その悩み、一度ご相談ください!
+    </h2>
+    <div class="fade-up flex items-center justify-center gap-4">
+      <img src="assets/mascot-singing-small.png" alt="歌うマスコットキャラクター" class="w-20 md:w-32 h-auto">
+      <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+        無料デザイン診断
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ④b 解決策・強み(6つのポイント) ==================== -->
+<section class="bg-section-gradient py-16 md:py-20 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <h3 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-6 leading-[1.5]">
+      大手代理店の「安心感」と、隣にいる「距離感」
+    </h3>
+    <p class="fade-up text-base md:text-lg font-bold text-brand-navy mb-8 leading-[1.8]">
+      物販の枠を超え、WEB・SNS・撮影まで<br>
+      「売るための全方位」を代表が直接監修します。
+    </p>
+    <p class="fade-up text-sm md:text-[15px] leading-[1.8] font-bold text-brand-navy mb-14 md:mb-16 max-w-[720px] mx-auto">
+      私たちは、大手の厳しい著作権管理・納期管理・炎上リスク対応体制をそのままに、<br class="hidden md:block">
+      「代表がすべてを直接見る」スタイルを貫くデザイン事務所です。<br class="hidden md:block">
+      担当者ガチャによるクオリティのバラつきは一切ありません。<br class="hidden md:block">
+      御社のアーティスト・IPの「世界観の翻訳者」として、伴走します。
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-left relative">
+      <div class="fade-up info-card p-6">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">「代表が全部見る」から、担当者ガチャなし</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">代理店にありがちな「営業とデザイナーで話が違う」、「新人担当になってクオリティが落ちた」をゼロに。代表が直接ヒアリングし、デザインの最終出力まで責任を持ちます。</p>
+      </div>
+      <div class="fade-up info-card p-6">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">大手企業との取引実績</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">30年間、世界のトップ企業から信頼され続けてきた実績があります。インディーズからメジャー案件まで、どの規模でも「超一流のプロの目」でクオリティを保証します。</p>
+      </div>
+      <div class="fade-up info-card p-6">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">デザイン事務所なのに、「服が作れる」</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">紙やWEBのデザインだけでなく、素材選定からシルエット、印刷手法の提案まで一気通貫で対応。だから、チープじゃない「ファンが本当に着たい日常使いできる服」が仕上がります。</p>
+      </div>
+      <div class="fade-up info-card p-6 relative">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">グッズに落とせるビジュアルをゼロから制作</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">外部のイラストレーターを別で探す必要はありません。物販で最も売れ行きを左右する「アーティスト公式ロゴ」「限定キャラクター」「描き下ろしイラスト」の制作まで対応。</p>
+        <img src="assets/mascot-wave-card.png" alt="喜ぶマスコットキャラクター" class="hidden md:block absolute -bottom-10 -right-6 w-24 h-auto">
+      </div>
+      <div class="fade-up info-card p-6">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">撮影、特設LP、SNS戦略まで丸投げOK</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">第一線のカメラマンを率いた宣伝用の着用撮影から、EC・LP制作、SNSティザー戦略まで網羅。複数の業者を管理する手間を完全に無くします。</p>
+      </div>
+      <div class="fade-up info-card p-6">
+        <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">広告の裏側を知り尽くした、炎上・著作権対策</h4>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">エンタメ業界で最も怖い「パクリ疑惑」や「権利侵害」「製造トラブル」。30年のノウハウで、あらゆるリスクを事前に回避する体制を整えています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑤ 制作実績(ギャラリー) ==================== -->
+<section class="bg-white py-16 md:py-20 px-5">
+  <div class="max-w-[1080px] mx-auto">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">過去の制作実績</h2>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-10 md:mb-12">DESIGN WORKS</p>
+
+    <div class="fade-up gallery-grid">
+      <a href="https://4phat.com/works/goods.html" target="_blank" rel="noopener noreferrer" class="gallery-goods relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-goods.jpg" alt="グッズ制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-xl md:text-2xl font-bold">グッズ</span>
+          <span class="text-white text-xs md:text-sm font-bold tracking-widest mt-1">GOODS</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/visual.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-visual.jpg" alt="ビジュアル制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">ビジュアル</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">VISUAL</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/ad.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-ad.jpg" alt="広告制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">広告</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">AD</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/music.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-music.jpg" alt="音楽関連制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">音楽</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">MUSIC</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/musical.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-stage-musical.jpg" alt="舞台・ミュージカル制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">舞台・ミュージカル</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">STAGE / MUSICAL</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/costume.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-costume.jpg" alt="衣装制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">衣装制作</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">COSTUME</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/logo-character.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-logo-character.jpg" alt="ロゴ・キャラクター制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">ロゴ・キャラクター</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">LOGO / CHARACTER</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/sports.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-sports.jpg" alt="スポーツ関連制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">スポーツ</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">SPORTS</span>
+        </div>
+      </a>
+      <a href="https://4phat.com/works/other.html" target="_blank" rel="noopener noreferrer" class="relative rounded-xl overflow-hidden group block">
+        <img src="assets/gallery-other.jpg" alt="その他制作実績" class="transition-transform duration-300 group-hover:scale-105">
+        <div class="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+          <span class="text-white text-lg md:text-xl font-bold">その他</span>
+          <span class="text-white text-xs font-bold tracking-widest mt-1">OTHER</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑥ クライアントの声(事例・口コミ) ==================== -->
+<section class="bg-section-gradient py-16 md:py-20 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-4">クライアント様の声</h2>
+    <div class="fade-up text-sm md:text-base font-bold text-brand-navy mb-14 md:mb-16 leading-[1.8]">
+      <p class="text-balance">「ただのグッズ」が「完売が続くブランド」へ</p>
+      <p class="text-balance">現場担当者が語る、WHITE Phat Graphicsと創る物販の舞台裏</p>
+    </div>
+
+    <div class="fade-up bubble text-left p-6 md:p-8 mb-10 relative max-w-[820px] mx-auto">
+      <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-4">知識ゼロでも、アパレルから特設LPまで丸投げできた</h4>
+      <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-6">
+        アパレルの知識がない私に代わって、仕様選定から着用撮影、特設LPの構築まで網羅。ファンからも「普段使いしやすい!」と大絶賛でした!<br><br>
+        これまでは無難なグッズばかりで売れ行きも伸び悩んでいました。そこで、長年の実績があるWHITE Phat Graphicsさんに相談したところ、絶妙な素材の質感、グラフィックが映える特殊印刷の技法まで、プロの視点から全て提案してくださいました。面倒な専門業者とのやり取りもすべて丸投げできたので、本当に助かりました。プロのカメラマンを率いた着用写真の撮影ディレクションから、限定キャラクターの起こし、さらには物販特設LPのご相談まで一括で引き受けてくれました。窓口がひとつなので本当にラクで、ライブ会場では開場後すぐにアパレル類が完売。ファンがSNSで「普通にオシャレだから街でも着る」と自慢してくれているのを見て、熱量が確実に加速したのを実感しています。
+      </p>
+      <div class="flex items-center justify-between">
+        <p class="text-xs md:text-sm font-bold text-brand-navy">音楽芸能プロダクション グッズ制作・宣伝担当 A・I 様</p>
+        <img src="assets/mascot-testimonial-cat.png" alt="クライアントの声マスコット1" class="w-16 md:w-20 h-auto -mb-8 -mr-2">
+      </div>
+    </div>
+
+    <div class="fade-up bubble bubble-tip-right text-left p-6 md:p-8 mb-14 relative max-w-[820px] mx-auto">
+      <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-4">代表直轄の安心感とスピード</h4>
+      <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-6">
+        ツアー直前のタイトなスケジュールでも、代表直接だから話が早い。大手並みの厳格な進行管理で、一切の不安がありませんでした。<br><br>
+        イベント物販は絶対に納期遅延が許されないため、いつも進行管理には胃が痛い思いをしていました。大手代理店さんだと窓口が多くてデザイン修正に何日もかかりますが、WHITE Phat Graphicsさんは代表の東さんと直接やり取りできるため、意思決定がとにかく早いです。こちらの曖昧なニュアンスや「アーティストの世界観」を100%汲み取ったデザインが、一発目から最高のクオリティで上がってきた時は感動しました。30年の実績があるからこそ、版権の管理や製造ラインのリスクチェックも極めて厳格で、タイトなスケジュールでも終始安心して進行を任せられました。仕事のしやすさと、クオリティへの妥協のなさは、まさに理想的な相棒です。
+      </p>
+      <div class="flex items-center justify-between">
+        <p class="text-xs md:text-sm font-bold text-brand-navy">音楽レーベル イベント企画・運営担当 K・T様</p>
+        <img src="assets/mascot-testimonial-wolf.png" alt="クライアントの声マスコット2" class="w-16 md:w-20 h-auto -mb-8 -mr-2">
+      </div>
+    </div>
+
+    <div class="fade-up flex items-center justify-center gap-4">
+      <a href="#contact" class="btn-cta inline-block text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+        無料デザイン診断
+      </a>
+      <img src="assets/mascot-cta-wave.png" alt="手を振るマスコットキャラクター" class="w-20 md:w-32 h-auto">
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑦ 制作の流れ(ステップ) ==================== -->
+<section class="bg-white py-16 md:py-20 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-2">コンセプトの解剖から製造まで</h2>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy mb-10 md:mb-14">代表直接の伴走だから、話が早くてブレがない</p>
+
+    <div class="fade-up info-card text-left p-6 md:p-10 max-w-[820px] mx-auto">
+      <h3 class="text-xl md:text-2xl font-bold text-brand-navy text-center mb-8 md:mb-10">制作フロー例</h3>
+
+      <div class="flex gap-5 md:gap-8 mb-8">
+        <div class="text-4xl md:text-6xl font-black text-brand-blue/30 leading-none">1</div>
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-brand-navy mb-1">代表直接ヒアリング(世界観の解剖)</h4>
+          <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">アーティストの文脈、ファンの心理、今回のイベントの目標を代表が直接お聞きします。</p>
+        </div>
+      </div>
+      <div class="text-center text-brand-navy text-xl mb-8">▼</div>
+
+      <div class="flex gap-5 md:gap-8 mb-8">
+        <div class="text-4xl md:text-6xl font-black text-brand-blue/30 leading-none">2</div>
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-brand-navy mb-1">企画提案&リスクチェック</h4>
+          <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">ただのデザイン案だけでなく、素材・シルエット・印刷技法まで考慮したアパレル企画をご提案。権利関係や製造ラインのリスクもこの段階でクリアにします。</p>
+        </div>
+      </div>
+      <div class="text-center text-brand-navy text-xl mb-8">▼</div>
+
+      <div class="flex gap-5 md:gap-8 mb-8">
+        <div class="text-4xl md:text-6xl font-black text-brand-blue/30 leading-none">3</div>
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-brand-navy mb-1">クリエイティブ制作(デザイン→製造管理)</h4>
+          <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">30年の実績を持つ最前線のクオリティでデザインをフィニッシュ。専門業者との面倒な技術調整もすべて弊社が引き受けます。</p>
+        </div>
+      </div>
+      <div class="text-center text-brand-navy text-xl mb-8">▼</div>
+
+      <div class="flex gap-5 md:gap-8">
+        <div class="text-4xl md:text-6xl font-black text-brand-blue/30 leading-none">4</div>
+        <div>
+          <h4 class="text-base md:text-lg font-bold text-brand-navy mb-1">納品(現場での熱狂へ)</h4>
+          <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">厳格な納期管理のもと、イベント日に合わせて完璧な状態でお届けします。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑧ 料金プラン ==================== -->
+<section class="bg-white pb-16 md:pb-20 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <div class="fade-up info-card p-6 md:p-10">
+      <h2 class="text-2xl md:text-[28px] font-bold text-brand-navy mb-3">選べる3つのプラン</h2>
+      <p class="text-sm md:text-[15px] font-bold text-brand-navy mb-10">弊社の強みである「アパレル(服)が作れる総合力」を段階的に発注できる3つのプランです。</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+        <div class="flex flex-col items-center">
+          <h3 class="text-lg md:text-xl font-bold text-brand-navy mb-4 text-center">コアアイテム・プロデュース</h3>
+          <div class="info-card p-6 w-full flex-1">
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-4">まずは1、2品、ファンの熱量を爆発させる『主役アパレル』を作りたい</p>
+            <p class="text-center text-brand-navy mb-4">▼</p>
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-6">メインTシャツ、パーカーなどアパレル基軸アイテム(1~2種)の<br>・グラフィックデザイン<br>・ボディ選定<br>・製造仕様設計。</p>
+            <div class="flex justify-center">
+              <img src="assets/mascot-pricing-1.png" alt="プラン1マスコット" class="w-24 h-auto">
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <h3 class="text-lg md:text-xl font-bold text-brand-navy mb-4 text-center">トータル物販ブランディング</h3>
+          <div class="info-card p-6 w-full flex-1">
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-4">ツアーやイベント全体の物販を、一貫した世界観でブランド化したい</p>
+            <p class="text-center text-brand-navy mb-4">▼</p>
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-6">アパレル複数種(アウターから小物まで)各種グッズのトータルデザインラインナップ構築+製造管理。全体の統一感を代表が全て監修します。</p>
+            <div class="flex justify-center">
+              <img src="assets/mascot-pricing-2.png" alt="プラン2マスコット" class="w-24 h-auto">
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <h3 class="text-lg md:text-xl font-bold text-brand-navy mb-4 text-center">コンセプト・フルパッケージ</h3>
+          <div class="info-card p-6 w-full flex-1">
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-4">物販だけでなく、ECサイト・LPの立ち上げ、SNSの導線、宣伝用の写真撮影まで丸投げしたい</p>
+            <p class="text-center text-brand-navy mb-4">▼</p>
+            <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body mb-6">物販全体のデザイン・製造管理、衣装・宣伝写真撮影ディレクション物販特設LP/ECサイトの企画制作SNSティザー戦略の設計まで完全パッケージ。</p>
+            <div class="flex justify-center">
+              <img src="assets/mascot-pricing-3.png" alt="プラン3マスコット" class="w-24 h-auto">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑨ よくある質問(FAQ) ==================== -->
+<section class="bg-section-gradient py-16 md:py-20 px-5">
+  <div class="max-w-[1080px] mx-auto">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-10 md:mb-14">よくある質問</h2>
+
+    <div class="fade-up divide-y divide-brand-navy/40 border-t border-b border-brand-navy/40">
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：デザインだけでなく、撮影、HP制作、SNSの展開、ロゴやイラストもまとめて頼めますか？</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：はい、すべてゼロから一括でお任せください。弊社はロゴやキャラクター、イラスト制作を網羅しているだけでなく、撮影ディレクションを非常に得意としており、メジャーで活躍するカメラマン等の外部ネットワークを持っています。さらにWEB制作やSNS戦略までワンストップで対応するため、窓口が弊社ひとつにまとまり、担当者様の管理工数を大幅に削減しながら完璧に統一されたブランディングが可能です。</p>
+      </div>
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：アパレルの知識が全くないのですが、本当に丸投げして大丈夫ですか？</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：はい、完全に安心してお任せください。私たちは「服が作れるデザイン事務所」です。トレンドのシルエット、生地の質感、グラフィックが一番映える特殊印刷の技法まで、プロの視点から全てご提案します。面倒な専門業者との専門的なやり取りも、すべて弊社が窓口となり進行します。</p>
+      </div>
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：イベント日まで納期がタイトなのですが、対応可能ですか？</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：まずは現在のスケジュールを代表へ直接ご相談ください。30年間、数々の案件を「無事故・納期厳守」で回してきた厳格な進行管理体制があります。代表直轄で意思決定を行うため、代理店のような伝言ゲームによる時間のロスがなく、圧倒的なスピード感で対応いたします。</p>
+      </div>
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：すでに製造業者(印刷工場)が決まっている場合、デザインのみのご依頼も可能ですか？</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：もちろんです。御社が指定される工場の入稿フォーマットや印刷特性(シルクスクリーン、インクジェット、刺繍など)を事前にヒアリングし、現場の職人様が最も扱いやすく、かつ仕上がりが最高の状態になる「再現性の高い入稿データ」を制作・納品いたします。</p>
+      </div>
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：大手代理店に頼むほどの予算はないのですが、相談に乗ってもらえますか？</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：ぜひご相談ください。大手代理店のような「何層もの中間マージン」が発生しないため、同じトップクオリティのクリエイティブを、無駄のない適正価格でご提供できます。ご予算の範囲内で、最もファンの熱量を高められるアイテムを一緒に考えさせていただきます。</p>
+      </div>
+      <div class="py-6">
+        <p class="text-sm md:text-base font-bold text-brand-navy">Q：デザインが途中で炎上したり、権利侵害(パクリ等)になったりするリスクが心配です。</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：30年間にわたり厳格なコンプライアンスが求められるトップ企業やメジャーレーベルと直接取引を継続してきた実績があります。フォントの商用利用権、モチーフの著作権チェックなど、広告の裏側を知り尽くしたプロの目で、リスクを事前に100%回避する体制を整えています。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑩ 問い合わせフォーム・最終CTA ==================== -->
+<section id="contact" class="bg-white py-16 md:py-20 px-5">
+  <div class="max-w-[720px] mx-auto">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">無料デザイン診断</h2>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy text-center mb-10">翌営業日までにご返信します</p>
+
+    <form id="contact-form" novalidate class="fade-up space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="field-company" class="block text-sm md:text-base font-bold text-brand-navy mb-2">会社名[必須]</label>
+          <input id="field-company" name="company" type="text" required class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
+          <p class="field-error hidden text-xs text-red-600 mt-1">会社名をご入力ください。</p>
+        </div>
+        <div>
+          <label for="field-name" class="block text-sm md:text-base font-bold text-brand-navy mb-2">ご担当者様氏名[必須]</label>
+          <input id="field-name" name="name" type="text" required class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
+          <p class="field-error hidden text-xs text-red-600 mt-1">ご担当者様氏名をご入力ください。</p>
+        </div>
+      </div>
+      <div>
+        <label for="field-email" class="block text-sm md:text-base font-bold text-brand-navy mb-2">メールアドレス[必須]</label>
+        <input id="field-email" name="email" type="email" required class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
+        <p class="field-error hidden text-xs text-red-600 mt-1">正しいメールアドレスをご入力ください。</p>
+      </div>
+      <div>
+        <label for="field-message" class="block text-sm md:text-base font-bold text-brand-navy mb-2">現在のお悩み・ご要望[必須]</label>
+        <textarea id="field-message" name="message" required rows="5" placeholder="例）新しいグッズを作りたい / SNS戦略の相談をしたい&#10;オリジナルのアパレルを広告込みで相談したい" class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base leading-[1.8] focus:outline-none focus:ring-2 focus:ring-brand-blue"></textarea>
+        <p class="field-error hidden text-xs text-red-600 mt-1">お悩み・ご要望をご入力ください。</p>
+      </div>
+      <div class="pt-4 text-center">
+        <button type="submit" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+          無料デザイン診断
+        </button>
+      </div>
+      <p id="form-status" class="hidden text-center text-sm font-bold" role="status" aria-live="polite"></p>
+    </form>
+
+    <div id="form-success" class="fade-up info-card hidden p-8 md:p-12 text-center">
+      <p class="text-lg md:text-xl font-bold text-brand-navy mb-2">お問い合わせありがとうございます。</p>
+      <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">担当者より翌営業日までにご連絡いたします。今しばらくお待ちください。</p>
+    </div>
+
+    <div class="fade-up flex items-center justify-center gap-4 mt-10">
+      <img src="assets/mascot-alert-phone.png" alt="電話案内マスコット" class="w-16 md:w-20 h-auto">
+      <div class="text-center">
+        <p class="text-sm md:text-base font-bold text-brand-navy mb-1">お急ぎの方はお電話にてご相談いただけます</p>
+        <p class="text-2xl md:text-3xl font-black text-brand-navy">
+          <span class="inline-block bg-brand-navy text-white text-xs md:text-sm font-bold rounded-full px-3 py-1 align-middle mr-2">TEL</span>
+          03-5467-6877
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ⑪ フッター ==================== -->
+<footer class="bg-section-gradient py-6 md:py-8 px-5">
+  <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+</footer>
+
+<script>
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Contact form validation & submit
+  const contactForm = document.getElementById('contact-form');
+  const formStatus = document.getElementById('form-status');
+  const formSuccess = document.getElementById('form-success');
+
+  if (contactForm) {
+    contactForm.querySelectorAll('input, textarea').forEach((field) => {
+      field.addEventListener('input', () => {
+        const errorEl = field.closest('div').querySelector('.field-error');
+        if (field.checkValidity()) {
+          field.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+          errorEl?.classList.add('hidden');
+        }
+      });
+    });
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      let isValid = true;
+      let firstInvalid = null;
+
+      contactForm.querySelectorAll('input, textarea').forEach((field) => {
+        const errorEl = field.closest('div').querySelector('.field-error');
+        if (!field.checkValidity()) {
+          isValid = false;
+          field.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+          errorEl?.classList.remove('hidden');
+          if (!firstInvalid) firstInvalid = field;
+        } else {
+          field.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+          errorEl?.classList.add('hidden');
+        }
+      });
+
+      if (!isValid) {
+        formStatus.textContent = '未入力の項目があります。ご確認ください。';
+        formStatus.classList.remove('hidden');
+        formStatus.classList.add('text-red-600');
+        firstInvalid.focus();
+        return;
+      }
+
+      formStatus.classList.add('hidden');
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+
+      const payload = {
+        company: contactForm.querySelector('#field-company').value.trim(),
+        name: contactForm.querySelector('#field-name').value.trim(),
+        email: contactForm.querySelector('#field-email').value.trim(),
+        message: contactForm.querySelector('#field-message').value.trim(),
+      };
+
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+        .then(async (res) => {
+          if (!res.ok) {
+            const data = await res.json().catch(() => ({}));
+            throw new Error(data.error || '送信に失敗しました。');
+          }
+          contactForm.classList.add('hidden');
+          formSuccess.classList.remove('hidden');
+          formSuccess.classList.add('is-visible');
+          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch((err) => {
+          formStatus.textContent = '送信に失敗しました。お手数ですがお電話にてご連絡いただくか、時間をおいて再度お試しください。';
+          formStatus.classList.remove('hidden');
+          formStatus.classList.add('text-red-600');
+          submitBtn.disabled = false;
+          submitBtn.textContent = '無料デザイン診断';
+        });
+    });
+  }
+</script>
+
+</body>
+</html>
