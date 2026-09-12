@@ -4,36 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WHITE.PHAT.GRAPHICS | ファンの熱狂を、そのままカタチに</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ["'Noto Sans JP'", "'Hiragino Sans'", "sans-serif"],
-        },
-        colors: {
-          brand: {
-            blue: '#589DF2',
-            bluehover: '#3B82F6',
-            bluedark: '#2563EB',
-            navy: '#1E293B',
-            slate: '#64748B',
-            body: '#334155',
-            border: '#E2E8F0',
-            bubble: '#94A3B8',
-            dark: '#18181B',
-          }
-        },
-        borderRadius: {
-          'xl2': '16px',
-        }
-      }
-    }
-  }
-</script>
 <style>
   html { scroll-behavior: smooth; }
   body { color: #1E293B; }
@@ -151,6 +123,10 @@
     object-fit: cover;
   }
 </style>
+<!-- Tailwind 由来のユーティリティCSS(静的化済み)。
+     CDN版では実行時に後から挿入され、上の <style> より優先されていたため、
+     同じ優先順位を保つようにここ(= <style> の後)で読み込む。 -->
+<link rel="stylesheet" href="assets/css/tailwind.css">
 </head>
 <body class="font-sans text-[#1E293B] antialiased">
 

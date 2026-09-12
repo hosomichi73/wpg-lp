@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>お問い合わせありがとうございました | WHITE.PHAT.GRAPHICS</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -15,25 +14,6 @@
   このページの表示自体がコンバージョンとして計測されます。
 -->
 
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          sans: ["'Noto Sans JP'", "'Hiragino Sans'", "sans-serif"],
-        },
-        colors: {
-          brand: {
-            blue: '#589DF2',
-            navy: '#1E293B',
-            body: '#334155',
-            border: '#E2E8F0',
-          }
-        }
-      }
-    }
-  }
-</script>
 <style>
   body { color: #1E293B; }
 
@@ -63,6 +43,8 @@
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
 </style>
+<!-- Tailwind 由来のユーティリティCSS(静的化済み)。LP本体と読み込み順を揃えている。 -->
+<link rel="stylesheet" href="assets/css/tailwind.css">
 </head>
 <body class="font-sans text-[#1E293B] antialiased min-h-screen flex flex-col">
 
