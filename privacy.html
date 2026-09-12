@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>プライバシーポリシー | WHITE.PHAT.GRAPHICS</title>
+<meta name="description" content="有限会社ホワイト.ファット.グラフィックスの個人情報の取り扱いに関する方針です。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+  body { color: #1E293B; }
+
+  /* ===== Section background gradient (Yellow -> White -> Light Blue, left to right) ===== */
+  .bg-section-gradient {
+    background: linear-gradient(to right, #FEF9C3 0%, #FFFFFF 50%, #E0F2FE 100%);
+  }
+
+  /* ===== CTA main button ===== */
+  .btn-cta {
+    border-radius: 9999px;
+    background-color: #589DF2;
+    box-shadow: 0 4px 14px rgba(88, 157, 242, 0.4);
+    transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    background-color: #3B82F6;
+    filter: brightness(1.05);
+  }
+
+  /* ===== Info card ===== */
+  .info-card {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+
+  /* ===== プライバシーポリシー本文 ===== */
+  .policy-lead {
+    font-size: 14px;
+    line-height: 1.9;
+    font-weight: 700;
+    color: #1E293B;
+    margin-bottom: 40px;
+  }
+  .policy-section { margin-bottom: 36px; }
+  /* 見出しは左のブルーの罫でメリハリを付ける */
+  .policy-heading {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #1E293B;
+    border-left: 4px solid #589DF2;
+    padding-left: 12px;
+    margin-bottom: 12px;
+  }
+  .policy-text {
+    font-size: 14px;
+    line-height: 1.9;
+    color: #334155;
+  }
+  .policy-text + .policy-text { margin-top: 12px; }
+  .policy-list { margin-top: 10px; }
+  .policy-list + .policy-text { margin-top: 12px; }
+  .policy-list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 1.9;
+    color: #334155;
+  }
+  .policy-list li::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 0.82em;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background-color: #589DF2;
+  }
+  .policy-text a, .policy-contact a {
+    color: #3B82F6;
+    text-decoration: underline;
+  }
+  .policy-text a:hover, .policy-contact a:hover { color: #1D4ED8; }
+  /* 7.お問い合わせ窓口の連絡先ブロック */
+  .policy-contact {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 2;
+    color: #334155;
+  }
+  .policy-contact dt {
+    font-weight: 700;
+    color: #1E293B;
+  }
+  .policy-enacted {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #E2E8F0;
+    font-size: 13px;
+    color: rgba(30, 41, 59, 0.7);
+    text-align: right;
+  }
+  @media (min-width: 768px) {
+    .policy-lead { font-size: 15px; }
+    .policy-heading { font-size: 19px; }
+    .policy-text, .policy-list li, .policy-contact { font-size: 15px; }
+    .policy-section { margin-bottom: 40px; }
+  }
+
+  /* ===== フッター(LP本体と共通) ===== */
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 28px;
+    margin-bottom: 22px;
+  }
+  .footer-nav a {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    transition: color 0.2s ease;
+  }
+  .footer-nav a:hover { color: #3B82F6; text-decoration: underline; }
+  .footer-company { margin-bottom: 18px; }
+  .footer-company p {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    line-height: 1.8;
+  }
+  .footer-company .footer-company-en {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(30, 41, 59, 0.7);
+    letter-spacing: 0.04em;
+  }
+</style>
+<!-- Tailwind 由来のユーティリティCSS(静的化済み)。LP本体と読み込み順を揃えている。 -->
+<link rel="stylesheet" href="assets/css/tailwind.css">
+</head>
+<body class="font-sans text-[#1E293B] antialiased min-h-screen flex flex-col">
+
+<!-- ==================== ヘッダー ==================== -->
+<header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur z-50 border-b border-brand-border">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between px-5 py-4 md:py-5">
+    <a href="/" class="text-sm md:text-lg font-black tracking-widest text-brand-navy">WHITE.PHAT.GRAPHICS</a>
+  </div>
+</header>
+<div class="h-[60px] md:h-[80px]"></div>
+
+<!-- ==================== プライバシーポリシー本文 ==================== -->
+<main class="bg-white flex-1 px-5 py-16 md:py-20">
+  <div class="max-w-[820px] mx-auto">
+
+    <h1 class="text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">プライバシーポリシー</h1>
+    <p class="text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-10 md:mb-12">PRIVACY POLICY</p>
+
+    <p class="policy-lead">
+      有限会社ホワイト.ファット.グラフィックス（以下「当社」）は、お客様の個人情報の保護を重要な責務と認識し、以下の方針に基づき適切に取り扱います。
+    </p>
+
+    <!-- 1. 取得する個人情報 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">1. 取得する個人情報</h2>
+      <p class="policy-text">当社は、お問い合わせフォームを通じて以下の情報を取得いたします。</p>
+      <ul class="policy-list">
+        <li>会社名</li>
+        <li>ご担当者様氏名</li>
+        <li>メールアドレス</li>
+        <li>お問い合わせ内容</li>
+      </ul>
+    </section>
+
+    <!-- 2. 利用目的 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">2. 利用目的</h2>
+      <p class="policy-text">取得した個人情報は、以下の目的で利用いたします。</p>
+      <ul class="policy-list">
+        <li>お問い合わせへの回答およびご連絡</li>
+        <li>ご依頼内容に関するご提案、お見積りの提示</li>
+        <li>契約の締結および履行</li>
+        <li>当社サービスに関するご案内</li>
+      </ul>
+      <p class="policy-text">上記以外の目的で利用する場合は、あらかじめご本人の同意を得るものとします。</p>
+    </section>
+
+    <!-- 3. 第三者への提供 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">3. 第三者への提供</h2>
+      <p class="policy-text">当社は、次の場合を除き、ご本人の同意なく個人情報を第三者に提供いたしません。</p>
+      <ul class="policy-list">
+        <li>法令に基づく場合</li>
+        <li>人の生命、身体または財産の保護のために必要があり、本人の同意を得ることが困難である場合</li>
+        <li>業務の遂行に必要な範囲で、秘密保持義務を課した委託先に提供する場合</li>
+      </ul>
+    </section>
+
+    <!-- 4. 安全管理措置 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">4. 安全管理措置</h2>
+      <p class="policy-text">当社は、個人情報の漏洩、滅失または毀損の防止その他の安全管理のため、必要かつ適切な措置を講じます。</p>
+    </section>
+
+    <!-- 5. 開示・訂正・削除等のご請求 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">5. 開示・訂正・削除等のご請求</h2>
+      <p class="policy-text">ご本人から個人情報の開示、訂正、追加、削除、利用停止等のお申し出があった場合には、ご本人であることを確認のうえ、法令に従い速やかに対応いたします。</p>
+    </section>
+
+    <!-- 6. Cookie等の利用について(Google広告のコンバージョン計測に関わるため必須) -->
+    <section class="policy-section">
+      <h2 class="policy-heading">6. Cookie等の利用について</h2>
+      <p class="policy-text">当社のウェブサイトでは、サービス向上および広告配信の最適化のため、Cookieを利用する場合があります。Cookieによって個人を特定できる情報を取得することはありません。ブラウザの設定によりCookieの利用を無効にすることが可能です。ただし、その場合は一部の機能がご利用いただけない場合があります。</p>
+      <p class="policy-text">当社では、Google広告およびGoogleアナリティクスを利用しております。これらのサービスにおけるデータの取り扱いについては、<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Googleのプライバシーポリシー</a>をご確認ください。</p>
+    </section>
+
+    <!-- 7. お問い合わせ窓口 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">7. お問い合わせ窓口</h2>
+      <p class="policy-text">個人情報の取り扱いに関するお問い合わせは、下記までご連絡ください。</p>
+      <div class="info-card p-6 md:p-8 policy-contact">
+        <p class="font-bold text-brand-navy">有限会社ホワイト.ファット.グラフィックス</p>
+        <p>所在地：東京都渋谷区神宮前6-18-2 702</p>
+        <p>TEL：<a href="tel:0354676877">03-5467-6877</a></p>
+        <p>メール：<a href="mailto:whitephat7@gmail.com">whitephat7@gmail.com</a></p>
+      </div>
+    </section>
+
+    <!-- 8. 本ポリシーの改定 -->
+    <section class="policy-section">
+      <h2 class="policy-heading">8. 本ポリシーの改定</h2>
+      <p class="policy-text">当社は、法令の変更等に応じて本ポリシーを改定することがあります。改定後の内容は、当社ウェブサイトに掲載した時点から効力を生じるものとします。</p>
+    </section>
+
+    <p class="policy-enacted">制定日：2025年7月7日</p>
+
+    <div class="text-center mt-10">
+      <a href="/" class="btn-cta inline-block text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+        トップへ戻る
+      </a>
+    </div>
+
+  </div>
+</main>
+
+<!-- ==================== フッター ==================== -->
+<footer class="bg-section-gradient py-10 md:py-12 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <nav class="footer-nav">
+      <a href="/privacy">プライバシーポリシー</a>
+      <a href="https://4phat.com/#company" target="_blank" rel="noopener noreferrer">会社概要</a>
+      <a href="https://4phat.com/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+    </nav>
+    <div class="footer-company">
+      <p>有限会社ホワイト.ファット.グラフィックス</p>
+      <p class="footer-company-en">WHITE Phat Graphics Co., Ltd.</p>
+      <p>TEL 03-5467-6877</p>
+    </div>
+    <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>
