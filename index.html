@@ -122,6 +122,95 @@
     height: 100%;
     object-fit: cover;
   }
+
+  /* ===== FV 数値バー(実績サマリー) ===== */
+  .stat-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .stat-bar > div { padding: 0 6px; }
+  .stat-bar > div + div { border-left: 1px solid rgba(30, 41, 59, 0.2); }
+  .stat-num {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #589DF2;
+  }
+  .stat-num span { font-size: 0.65em; margin-left: 1px; }
+  .stat-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #1E293B;
+    margin-top: 4px;
+  }
+  @media (min-width: 768px) {
+    .stat-bar { max-width: 640px; }
+    .stat-num { font-size: 40px; }
+    .stat-label { font-size: 14px; }
+  }
+
+  /* ===== 実績セクション(画像は後日差し込み) ===== */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  /* スマホは1列。枠が3つなので2列にすると右下が空いてしまう */
+  @media (max-width: 767px) {
+    .works-grid { grid-template-columns: 1fr; gap: 16px; }
+  }
+  /* 画像が入るまでの仮枠。<img> に差し替えたらこのクラスは不要 */
+  .works-placeholder {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    border: 1px dashed #94A3B8;
+    background-color: #F8FAFC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(30, 41, 59, 0.45);
+  }
+
+  /* ===== フォーム下 3点保証 ===== */
+  .guarantee-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 2rem;
+  }
+  @media (max-width: 767px) {
+    .guarantee-list { grid-template-columns: 1fr; gap: 10px; max-width: 260px; margin-left: auto; margin-right: auto; }
+  }
+  .guarantee-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 9999px;
+    background-color: #F1F5F9;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+  }
+  .guarantee-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+    background-color: #589DF2;
+    color: #FFFFFF;
+    font-size: 11px;
+    line-height: 1;
+  }
 </style>
 <!-- Tailwind 由来のユーティリティCSS(静的化済み)。
      CDN版では実行時に後から挿入され、上の <style> より優先されていたため、
@@ -175,6 +264,21 @@
       ><span class="inline-block">物販収益を</span
       ><span class="inline-block">最大化します。</span>
     </p>
+    <!-- 数値バー(実績サマリー) -->
+    <div class="fade-up stat-bar mb-8 md:mb-10">
+      <div>
+        <p class="stat-num">30<span>+</span></p>
+        <p class="stat-label">年の実績</p>
+      </div>
+      <div>
+        <p class="stat-num">500<span>+</span></p>
+        <p class="stat-label">プロジェクト</p>
+      </div>
+      <div>
+        <p class="stat-num">100<span>+</span></p>
+        <p class="stat-label">取引先企業</p>
+      </div>
+    </div>
     <div class="fade-up flex items-center justify-center gap-4">
       <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
         無料デザイン診断
@@ -268,6 +372,25 @@
       <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
         無料デザイン診断
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ④a-2 実績 ==================== -->
+<!-- ▼画像差し込み方法:
+     実績画像が用意できたら、下の <div class="works-placeholder">…</div> を
+     <img src="assets/works-01.jpg" alt="実績の説明" class="w-full h-auto rounded-xl">
+     に置き換えてください(画像は lp/assets/ に配置)。
+     枚数を増やす場合は同じブロックを複製すれば、3列グリッドに自動で並びます。 -->
+<section class="bg-white pt-16 pb-16 md:pt-20 md:pb-20 px-5">
+  <div class="max-w-[1080px] mx-auto">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">実績</h2>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-10 md:mb-12">ACHIEVEMENTS</p>
+
+    <div class="fade-up works-grid">
+      <div class="works-placeholder">実績画像</div>
+      <div class="works-placeholder">実績画像</div>
+      <div class="works-placeholder">実績画像</div>
     </div>
   </div>
 </section>
@@ -566,7 +689,22 @@
 <section id="contact" class="bg-white py-16 md:py-20 px-5">
   <div class="max-w-[720px] mx-auto">
     <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">無料デザイン診断</h2>
-    <p class="fade-up text-sm md:text-base font-bold text-brand-navy text-center mb-10">翌営業日までにご返信します</p>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy text-center mb-6">翌営業日までにご返信します</p>
+
+    <!-- 無料デザイン診断の説明 -->
+    <div class="fade-up info-card p-6 md:p-8 mb-10">
+      <p class="text-sm md:text-[15px] leading-[1.8] font-bold text-brand-navy text-center">
+        <span class="inline-block">30分の</span
+        ><span class="inline-block">オンライン相談です。</span
+        ><span class="inline-block">現在のグッズ企画・</span
+        ><span class="inline-block">物販計画を伺い、</span><br class="hidden md:block">
+        <span class="inline-block">『何をどう変えれば売れるか』を</span
+        ><span class="inline-block">代表が直接</span
+        ><span class="inline-block">ご提案します。</span><br class="hidden md:block">
+        <span class="inline-block">売り込みは</span
+        ><span class="inline-block">一切ありません。</span>
+      </p>
+    </div>
 
     <form id="contact-form" novalidate class="fade-up space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -598,6 +736,13 @@
       </div>
       <p id="form-status" class="hidden text-center text-sm font-bold" role="status" aria-live="polite"></p>
     </form>
+
+    <!-- 3点保証 -->
+    <div class="fade-up guarantee-list">
+      <p class="guarantee-item"><span class="guarantee-check" aria-hidden="true">✓</span>翌営業日までに返信</p>
+      <p class="guarantee-item"><span class="guarantee-check" aria-hidden="true">✓</span>お見積り無料</p>
+      <p class="guarantee-item"><span class="guarantee-check" aria-hidden="true">✓</span>秘密厳守</p>
+    </div>
 
     <div class="fade-up flex items-center justify-center gap-4 mt-10">
       <img src="assets/mascot-alert-phone.png" alt="電話案内マスコット" class="w-16 md:w-20 h-auto">
