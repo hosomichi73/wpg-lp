@@ -597,11 +597,6 @@
       <p id="form-status" class="hidden text-center text-sm font-bold" role="status" aria-live="polite"></p>
     </form>
 
-    <div id="form-success" class="fade-up info-card hidden p-8 md:p-12 text-center">
-      <p class="text-lg md:text-xl font-bold text-brand-navy mb-2">お問い合わせありがとうございます。</p>
-      <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">担当者より翌営業日までにご連絡いたします。今しばらくお待ちください。</p>
-    </div>
-
     <div class="fade-up flex items-center justify-center gap-4 mt-10">
       <img src="assets/mascot-alert-phone.png" alt="電話案内マスコット" class="w-16 md:w-20 h-auto">
       <div class="text-center">
@@ -636,7 +631,6 @@
   // Contact form validation & submit
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
-  const formSuccess = document.getElementById('form-success');
 
   if (contactForm) {
     contactForm.querySelectorAll('input, textarea').forEach((field) => {
@@ -697,10 +691,8 @@
             const data = await res.json().catch(() => ({}));
             throw new Error(data.error || '送信に失敗しました。');
           }
-          contactForm.classList.add('hidden');
-          formSuccess.classList.remove('hidden');
-          formSuccess.classList.add('is-visible');
-          formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // 送信成功 → サンクスページへ遷移(Google広告のコンバージョン計測ポイント)
+          window.location.href = '/thanks';
         })
         .catch((err) => {
           formStatus.textContent = '送信に失敗しました。お手数ですがお電話にてご連絡いただくか、時間をおいて再度お試しください。';

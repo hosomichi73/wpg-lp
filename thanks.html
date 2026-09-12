@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>お問い合わせありがとうございました | WHITE.PHAT.GRAPHICS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<!-- ==================== Google広告 コンバージョンタグ 貼り付け位置 ==================== -->
+<!--
+  ここにGoogle広告のコンバージョンタグ(グローバルサイトタグ + イベントスニペット)を貼り付けてください。
+  このページの表示自体がコンバージョンとして計測されます。
+-->
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ["'Noto Sans JP'", "'Hiragino Sans'", "sans-serif"],
+        },
+        colors: {
+          brand: {
+            blue: '#589DF2',
+            navy: '#1E293B',
+            body: '#334155',
+            border: '#E2E8F0',
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { color: #1E293B; }
+
+  /* ===== Section background gradient (Yellow -> White -> Light Blue, left to right) ===== */
+  .bg-section-gradient {
+    background: linear-gradient(to right, #FEF9C3 0%, #FFFFFF 50%, #E0F2FE 100%);
+  }
+
+  /* ===== CTA main button ===== */
+  .btn-cta {
+    border-radius: 9999px;
+    background-color: #589DF2;
+    box-shadow: 0 4px 14px rgba(88, 157, 242, 0.4);
+    transition: transform 0.2s ease, filter 0.2s ease, background-color 0.2s ease;
+  }
+  .btn-cta:hover {
+    transform: translateY(-2px);
+    background-color: #3B82F6;
+    filter: brightness(1.05);
+  }
+
+  /* ===== Info card ===== */
+  .info-card {
+    border-radius: 12px;
+    border: 1px solid #E2E8F0;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+</style>
+</head>
+<body class="font-sans text-[#1E293B] antialiased min-h-screen flex flex-col">
+
+<!-- ==================== ヘッダー ==================== -->
+<header class="fixed top-0 left-0 w-full bg-white/95 backdrop-blur z-50 border-b border-brand-border">
+  <div class="max-w-[1200px] mx-auto flex items-center justify-between px-5 py-4 md:py-5">
+    <a href="/" class="text-sm md:text-lg font-black tracking-widest text-brand-navy">WHITE.PHAT.GRAPHICS</a>
+  </div>
+</header>
+<div class="h-[60px] md:h-[80px]"></div>
+
+<!-- ==================== サンクスメッセージ ==================== -->
+<main class="bg-section-gradient flex-1 flex items-center px-5 py-16 md:py-24">
+  <div class="max-w-[720px] mx-auto w-full text-center">
+
+    <img src="assets/mascot-cta-wave.png" alt="お礼を伝えるマスコットキャラクター" class="w-24 md:w-32 h-auto mx-auto mb-6">
+
+    <h1 class="text-2xl md:text-[32px] leading-[1.5] font-bold text-brand-navy mb-4">
+      お問い合わせ<br class="md:hidden">ありがとうございました
+    </h1>
+
+    <p class="text-sm md:text-base leading-[1.8] font-bold text-brand-navy mb-10">
+      翌営業日までにご返信いたします。<br>
+      今しばらくお待ちくださいませ。
+    </p>
+
+    <div class="info-card p-6 md:p-8 text-left mb-10">
+      <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">
+        ご入力いただいた内容を担当者が確認し、折り返しご連絡いたします。<br>
+        お急ぎの場合は、下記までお電話にてお問い合わせください。
+      </p>
+      <p class="text-xl md:text-2xl font-black text-brand-navy mt-4 text-center">
+        <span class="inline-block bg-brand-navy text-white text-xs md:text-sm font-bold rounded-full px-3 py-1 align-middle mr-2">TEL</span>
+        03-5467-6877
+      </p>
+    </div>
+
+    <a href="/" class="btn-cta inline-block text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+      トップへ戻る
+    </a>
+
+  </div>
+</main>
+
+<!-- ==================== フッター ==================== -->
+<footer class="bg-white py-6 md:py-8 px-5 border-t border-brand-border">
+  <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
