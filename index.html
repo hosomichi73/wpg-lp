@@ -152,6 +152,50 @@
     .stat-label { font-size: 14px; }
   }
 
+  /* ===== 送信ボタン下のプライバシーポリシー同意文 ===== */
+  .form-privacy-note {
+    margin-top: 16px;
+    font-size: 12px;
+    line-height: 1.8;
+    color: rgba(30, 41, 59, 0.7);
+  }
+  .form-privacy-note a {
+    font-weight: 700;
+    color: #3B82F6;
+    text-decoration: underline;
+  }
+  .form-privacy-note a:hover { color: #1D4ED8; }
+
+  /* ===== フッター(ナビ・会社情報) ===== */
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 28px;
+    margin-bottom: 22px;
+  }
+  .footer-nav a {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    transition: color 0.2s ease;
+  }
+  .footer-nav a:hover { color: #3B82F6; text-decoration: underline; }
+  .footer-company { margin-bottom: 18px; }
+  .footer-company p {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    line-height: 1.8;
+  }
+  .footer-company .footer-company-en {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(30, 41, 59, 0.7);
+    letter-spacing: 0.04em;
+  }
+
   /* ===== フォーム下 3点保証 ===== */
   .guarantee-list {
     display: grid;
@@ -688,6 +732,11 @@
         <button type="submit" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
           無料デザイン診断
         </button>
+        <p class="form-privacy-note">
+          <span class="inline-block">送信をもって、</span
+          ><span class="inline-block"><a href="/privacy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>に</span
+          ><span class="inline-block">同意いただいたものとみなします</span>
+        </p>
       </div>
       <p id="form-status" class="hidden text-center text-sm font-bold" role="status" aria-live="polite"></p>
     </form>
@@ -713,8 +762,20 @@
 </section>
 
 <!-- ==================== ⑪ フッター ==================== -->
-<footer class="bg-section-gradient py-6 md:py-8 px-5">
-  <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+<footer class="bg-section-gradient py-10 md:py-12 px-5">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <nav class="footer-nav">
+      <a href="/privacy">プライバシーポリシー</a>
+      <a href="https://4phat.com/#company" target="_blank" rel="noopener noreferrer">会社概要</a>
+      <a href="https://4phat.com/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+    </nav>
+    <div class="footer-company">
+      <p>有限会社ホワイト.ファット.グラフィックス</p>
+      <p class="footer-company-en">WHITE Phat Graphics Co., Ltd.</p>
+      <p>TEL 03-5467-6877</p>
+    </div>
+    <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+  </div>
 </footer>
 
 <script>
