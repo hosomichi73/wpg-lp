@@ -42,6 +42,36 @@
     background-color: #FFFFFF;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
   }
+
+  /* ===== フッター(LP本体と共通) ===== */
+  .footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px 28px;
+    margin-bottom: 22px;
+  }
+  .footer-nav a {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    transition: color 0.2s ease;
+  }
+  .footer-nav a:hover { color: #3B82F6; text-decoration: underline; }
+  .footer-company { margin-bottom: 18px; }
+  .footer-company p {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1E293B;
+    line-height: 1.8;
+  }
+  .footer-company .footer-company-en {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(30, 41, 59, 0.7);
+    letter-spacing: 0.04em;
+  }
 </style>
 <!-- Tailwind 由来のユーティリティCSS(静的化済み)。LP本体と読み込み順を揃えている。 -->
 <link rel="stylesheet" href="assets/css/tailwind.css">
@@ -90,8 +120,20 @@
 </main>
 
 <!-- ==================== フッター ==================== -->
-<footer class="bg-white py-6 md:py-8 px-5 border-t border-brand-border">
-  <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+<footer class="bg-white py-10 md:py-12 px-5 border-t border-brand-border">
+  <div class="max-w-[1080px] mx-auto text-center">
+    <nav class="footer-nav">
+      <a href="/privacy">プライバシーポリシー</a>
+      <a href="https://4phat.com/#company" target="_blank" rel="noopener noreferrer">会社概要</a>
+      <a href="https://4phat.com/contact" target="_blank" rel="noopener noreferrer">お問い合わせ</a>
+    </nav>
+    <div class="footer-company">
+      <p>有限会社ホワイト.ファット.グラフィックス</p>
+      <p class="footer-company-en">WHITE Phat Graphics Co., Ltd.</p>
+      <p>TEL 03-5467-6877</p>
+    </div>
+    <p class="text-center text-xs md:text-sm font-bold text-brand-navy">© 2025 WHITE Phat Graphics Co., Ltd. All rights reserved.</p>
+  </div>
 </footer>
 
 </body>
