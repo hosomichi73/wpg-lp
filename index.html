@@ -152,30 +152,6 @@
     .stat-label { font-size: 14px; }
   }
 
-  /* ===== 実績セクション(画像は後日差し込み) ===== */
-  .works-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  /* スマホは1列。枠が3つなので2列にすると右下が空いてしまう */
-  @media (max-width: 767px) {
-    .works-grid { grid-template-columns: 1fr; gap: 16px; }
-  }
-  /* 画像が入るまでの仮枠。<img> に差し替えたらこのクラスは不要 */
-  .works-placeholder {
-    aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    border: 1px dashed #94A3B8;
-    background-color: #F8FAFC;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: 700;
-    color: rgba(30, 41, 59, 0.45);
-  }
-
   /* ===== フォーム下 3点保証 ===== */
   .guarantee-list {
     display: grid;
@@ -372,25 +348,6 @@
       <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
         無料デザイン診断
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ==================== ④a-2 実績 ==================== -->
-<!-- ▼画像差し込み方法:
-     実績画像が用意できたら、下の <div class="works-placeholder">…</div> を
-     <img src="assets/works-01.jpg" alt="実績の説明" class="w-full h-auto rounded-xl">
-     に置き換えてください(画像は lp/assets/ に配置)。
-     枚数を増やす場合は同じブロックを複製すれば、3列グリッドに自動で並びます。 -->
-<section class="bg-white pt-16 pb-16 md:pt-20 md:pb-20 px-5">
-  <div class="max-w-[1080px] mx-auto">
-    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">実績</h2>
-    <p class="fade-up text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-10 md:mb-12">ACHIEVEMENTS</p>
-
-    <div class="fade-up works-grid">
-      <div class="works-placeholder">実績画像</div>
-      <div class="works-placeholder">実績画像</div>
-      <div class="works-placeholder">実績画像</div>
     </div>
   </div>
 </section>
