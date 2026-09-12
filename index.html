@@ -429,7 +429,9 @@
       <div class="fade-up info-card p-6 relative">
         <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">グッズに落とせるビジュアルをゼロから制作</h4>
         <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body">外部のイラストレーターを別で探す必要はありません。物販で最も売れ行きを左右する「アーティスト公式ロゴ」「限定キャラクター」「描き下ろしイラスト」の制作まで対応。</p>
-        <img src="assets/mascot-wave-card.png" alt="喜ぶマスコットキャラクター" class="hidden md:block absolute -bottom-10 -right-6 w-24 h-auto">
+        <!-- 右へのはみ出し量(-right-4 = 16px)は、セクションの左右余白 px-5(20px)より
+             必ず小さくしておくこと。これを超えると画面幅768〜1120pxで横スクロールが発生する。 -->
+        <img src="assets/mascot-wave-card.png" alt="喜ぶマスコットキャラクター" class="hidden md:block absolute -bottom-10 -right-4 w-24 h-auto">
       </div>
       <div class="fade-up info-card p-6">
         <h4 class="text-lg md:text-xl font-bold text-brand-navy mb-3">撮影、特設LP、SNS戦略まで丸投げOK</h4>
