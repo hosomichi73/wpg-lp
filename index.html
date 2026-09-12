@@ -144,20 +144,36 @@
 <!-- ==================== ② ファーストビュー(FV) ==================== -->
 <section class="bg-section-gradient pt-12 pb-16 md:pt-20 md:pb-24 px-5">
   <div class="max-w-[1080px] mx-auto text-center">
+    <!-- 文節を inline-block で包み、狭い画面でも単語の途中で改行されないようにする。
+         span 同士の間に空白が入らないよう、閉じタグの `>` を次行の行頭に置いている。 -->
     <p class="fade-up text-base md:text-xl font-bold text-brand-navy mb-3 md:mb-4">
-      ファンの"熱狂"を、そのままカタチに
+      <span class="inline-block">ファンの"熱狂"を、</span
+      ><span class="inline-block">そのままカタチに</span>
     </p>
     <h1 class="fade-up text-[26px] leading-[1.4] tracking-[0.02em] md:text-[36px] md:leading-[1.4] md:tracking-[0.05em] font-black text-brand-navy mb-6 md:mb-8">
-      大手代理店品質の安心感<br>
+      <span class="inline-block">大手代理店品質の</span
+      ><span class="inline-block">安心感</span><br>
       <span class="text-2xl md:text-4xl">×</span><br>
-      代表直轄の距離感
+      <span class="inline-block">代表直轄の</span
+      ><span class="inline-block">距離感</span>
     </h1>
     <p class="fade-up text-lg md:text-2xl font-bold text-brand-navy mb-6 md:mb-8">
-      で生み出すエンタメ特化のクリエイティブ
+      <span class="inline-block">で生み出す</span
+      ><span class="inline-block">エンタメ特化の</span
+      ><span class="inline-block">クリエイティブ</span>
     </p>
     <p class="fade-up text-balance text-sm md:text-[15px] leading-[1.8] font-bold text-brand-navy mb-8 md:mb-10">
-      グラフィックから本格的なアパレル製造、宣伝撮影、特設LP構築まで一気通貫。<br class="hidden md:block">
-      30年にわたりエンタメシーンを支えてきた審美眼で、ファンのロイヤリティと物販収益を最大化します。
+      <span class="inline-block">グラフィックから</span
+      ><span class="inline-block">本格的なアパレル製造、</span
+      ><span class="inline-block">宣伝撮影、</span
+      ><span class="inline-block">特設LP構築まで</span
+      ><span class="inline-block">一気通貫。</span><br class="hidden md:block">
+      <span class="inline-block">30年にわたり</span
+      ><span class="inline-block">エンタメシーンを</span
+      ><span class="inline-block">支えてきた審美眼で、</span
+      ><span class="inline-block">ファンのロイヤリティと</span
+      ><span class="inline-block">物販収益を</span
+      ><span class="inline-block">最大化します。</span>
     </p>
     <div class="fade-up flex items-center justify-center gap-4">
       <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
