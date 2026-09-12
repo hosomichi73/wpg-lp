@@ -118,6 +118,16 @@
     transform: translateY(0);
   }
 
+  /* ===== 課題提起セクション: モバイル / デスクトップ の出し分け =====
+     Tailwind の hidden / md:hidden だけに頼ると、CDN の読み込みに失敗した際に
+     両方のレイアウトが同時に表示されてしまうため、ここで明示的に制御する。 */
+  .problems-mobile { display: grid; }
+  .problems-desktop { display: none; }
+  @media (min-width: 768px) {
+    .problems-mobile { display: none; }
+    .problems-desktop { display: block; }
+  }
+
   /* ===== Gallery grid ===== */
   .gallery-grid {
     display: grid;
@@ -209,7 +219,7 @@
     </p>
 
     <!-- Mobile: simple stacked layout -->
-    <div class="grid grid-cols-1 gap-y-4 items-end md:hidden">
+    <div class="problems-mobile grid grid-cols-1 gap-y-4 items-end md:hidden">
       <div class="fade-up bubble bubble-tip-right p-5">
         <p class="text-sm leading-[1.8] font-bold text-brand-navy">
           本格的なアパレル(服)を作りたいが、製造に関する知識がない…
@@ -231,7 +241,7 @@
     </div>
 
     <!-- Desktop: triangular layout matching the design, mascot as anchor point -->
-    <div class="hidden md:block relative h-[430px] max-w-[880px] mx-auto">
+    <div class="problems-desktop hidden md:block relative h-[430px] max-w-[880px] mx-auto">
       <img src="assets/mascot-problem-grumpy.png" alt="悩むマスコットキャラクター" class="absolute left-1/2 -translate-x-[42%] top-[105px] w-56 h-auto z-10">
 
       <div class="fade-up bubble bubble-tip-right absolute left-0 top-[30px] w-[320px] p-6">
@@ -554,7 +564,7 @@
       </div>
       <div class="py-6">
         <p class="text-sm md:text-base font-bold text-brand-navy">Q：デザインが途中で炎上したり、権利侵害(パクリ等)になったりするリスクが心配です。</p>
-        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：30年間にわたり厳格なコンプライアンスが求められるトップ企業やメジャーレーベルと直接取引を継続してきた実績があります。フォントの商用利用権、モチーフの著作権チェックなど、広告の裏側を知り尽くしたプロの目で、リスクを事前に100%回避する体制を整えています。</p>
+        <p class="text-sm md:text-[15px] leading-[1.8] text-brand-body pt-4">A：30年間にわたり厳格なコンプライアンスが求められるトップ企業やメジャーレーベルと直接取引を継続してきた実績があります。フォントの商用利用権、モチーフの著作権チェックなど、広告の裏側を知り尽くしたプロの目で、リスクを未然に防ぐ体制を整えています。</p>
       </div>
     </div>
   </div>
