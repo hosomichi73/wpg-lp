@@ -164,6 +164,94 @@
     .stat-label { font-size: 14px; }
   }
 
+  /* ===== フォーム: グループ見出し・チェック項目 ===== */
+  .form-block { border-top: 1px solid #E2E8F0; padding-top: 24px; }
+  .form-legend { font-size: 15px; font-weight: 700; line-height: 1.6; color: #1E293B; }
+  .form-note { margin-top: 4px; font-size: 12px; line-height: 1.7; color: rgba(30, 41, 59, 0.7); }
+  .check-grid { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 12px; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 13px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .check-item:hover { border-color: #589DF2; }
+  .check-item.is-checked { border-color: #589DF2; background-color: #F0F7FF; }
+  .check-item input[type="checkbox"] {
+    width: 20px; height: 20px; margin: 0;
+    flex-shrink: 0;
+    accent-color: #589DF2;
+    cursor: pointer;
+  }
+  .check-item span { font-size: 13px; line-height: 1.6; color: #334155; }
+  @media (min-width: 768px) {
+    .check-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .form-legend { font-size: 16px; }
+    .form-note { font-size: 13px; }
+    .check-item span { font-size: 14px; }
+  }
+
+  /* ===== フォーム: 画像添付 ===== */
+  .file-input {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .file-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 14px 22px;
+    border: 1px dashed #94A3B8;
+    border-radius: 12px;
+    background-color: #F8FAFC;
+    font-size: 14px;
+    font-weight: 700;
+    color: #1E293B;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+  .file-btn:hover { border-color: #589DF2; background-color: #F0F7FF; }
+  .file-input:focus-visible + .file-btn { border-color: #589DF2; box-shadow: 0 0 0 3px rgba(88,157,242,0.4); }
+  .thumb-list { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; }
+  .thumb { position: relative; width: 96px; }
+  .thumb img {
+    display: block; width: 96px; height: 96px;
+    object-fit: cover; border-radius: 10px; border: 1px solid #E2E8F0;
+  }
+  .thumb-name {
+    margin-top: 4px; font-size: 10px; line-height: 1.4;
+    color: rgba(30, 41, 59, 0.6); word-break: break-all;
+  }
+  .thumb-remove {
+    position: absolute; top: -9px; right: -9px;
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border: 2px solid #FFFFFF; border-radius: 9999px;
+    background-color: #1E293B; color: #FFFFFF;
+    font-size: 15px; line-height: 1; cursor: pointer;
+  }
+  .thumb-remove:hover { background-color: #DC2626; }
+  .file-msg { margin-top: 10px; font-size: 12px; line-height: 1.7; }
+  .file-msg.is-error { color: #DC2626; font-weight: 700; }
+  .file-msg.is-info { color: rgba(30, 41, 59, 0.7); }
+
+  /* ===== 送信ボタン上の案内文 ===== */
+  .form-lead {
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.8;
+    font-weight: 700;
+    color: #1E293B;
+  }
+  @media (min-width: 768px) { .form-lead { font-size: 14px; } }
+
   /* ===== 送信ボタン下のプライバシーポリシー同意文 ===== */
   .form-privacy-note {
     margin-top: 16px;
@@ -737,12 +825,66 @@
         <input id="field-email" name="email" type="email" required class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
         <p class="field-error hidden text-xs text-red-600 mt-1">正しいメールアドレスをご入力ください。</p>
       </div>
-      <div>
-        <label for="field-message" class="block text-sm md:text-base font-bold text-brand-navy mb-2">現在のお悩み・ご要望[必須]</label>
-        <textarea id="field-message" name="message" required rows="5" placeholder="例）新しいグッズを作りたい / SNS戦略の相談をしたい&#10;オリジナルのアパレルを広告込みで相談したい" class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base leading-[1.8] focus:outline-none focus:ring-2 focus:ring-brand-blue"></textarea>
-        <p class="field-error hidden text-xs text-red-600 mt-1">お悩み・ご要望をご入力ください。</p>
+      <!-- ① 過去の制作物で困っていたこと(複数選択可・任意) -->
+      <fieldset class="form-block">
+        <legend class="form-legend">① 過去の制作物で困っていたこと</legend>
+        <p class="form-note">（該当するものすべてにチェックしてください）</p>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="past" value="デザインがありきたりで、他と差別化できなかった"><span>デザインがありきたりで、他と差別化できなかった</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="思ったほど売れなかった／在庫が残った"><span>思ったほど売れなかった／在庫が残った</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="生地や印刷がチープに見えた"><span>生地や印刷がチープに見えた</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="仕上がりがイメージと違った（色・サイズ感・シルエット）"><span>仕上がりがイメージと違った（色・サイズ感・シルエット）</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="アーティストの世界観が表現しきれなかった"><span>アーティストの世界観が表現しきれなかった</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="修正ややり取りに時間がかかった／担当者で質がバラついた"><span>修正ややり取りに時間がかかった／担当者で質がバラついた</span></label>
+          <label class="check-item"><input type="checkbox" name="past" value="納期がギリギリ・遅れた"><span>納期がギリギリ・遅れた</span></label>
+        </div>
+      </fieldset>
+
+      <!-- 過去の制作物の画像(任意・最大3枚) -->
+      <div class="form-block">
+        <p class="form-legend">過去の制作物の画像（任意）</p>
+        <p class="form-note">※公開済みのもので構いません。いただいた画像は診断以外に使用しません。</p>
+        <input id="field-images" name="images" type="file" accept="image/*" multiple class="file-input">
+        <label for="field-images" class="file-btn">
+          <span aria-hidden="true">＋</span>画像を選ぶ（最大3枚）
+        </label>
+        <div id="image-previews" class="thumb-list"></div>
+        <p id="image-msg" class="file-msg hidden" role="status" aria-live="polite"></p>
       </div>
+
+      <!-- 自由記入① -->
+      <div class="form-block">
+        <label for="field-detail" class="form-legend block">その他・詳しく教えてください（任意）</label>
+        <textarea id="field-detail" name="detail" rows="4" class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base leading-[1.8] focus:outline-none focus:ring-2 focus:ring-brand-blue mt-3"></textarea>
+      </div>
+
+      <!-- ② 今後の案件で悩んでいること(複数選択可・任意) -->
+      <fieldset class="form-block">
+        <legend class="form-legend">② 今後の案件で悩んでいること</legend>
+        <p class="form-note">（該当するものすべてにチェックしてください）</p>
+        <div class="check-grid">
+          <label class="check-item"><input type="checkbox" name="future" value="主役になるアパレルを1〜2品作りたい"><span>主役になるアパレルを1〜2品作りたい</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="素材・ボディ選びや製造の知識がない"><span>素材・ボディ選びや製造の知識がない</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="ツアー・イベント全体の物販に統一感を出したい"><span>ツアー・イベント全体の物販に統一感を出したい</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="アイテム数が多く、管理しきれない"><span>アイテム数が多く、管理しきれない</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="ロゴ・キャラクター・イラストから作りたい"><span>ロゴ・キャラクター・イラストから作りたい</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="特設LP・EC・SNSの準備まで手が回らない"><span>特設LP・EC・SNSの準備まで手が回らない</span></label>
+          <label class="check-item"><input type="checkbox" name="future" value="宣伝用の写真撮影も任せたい"><span>宣伝用の写真撮影も任せたい</span></label>
+        </div>
+      </fieldset>
+
+      <!-- 自由記入② -->
+      <div class="form-block">
+        <label for="field-request" class="form-legend block">イベント時期・ご予算感・その他ご要望（任意）</label>
+        <textarea id="field-request" name="request" rows="4" class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base leading-[1.8] focus:outline-none focus:ring-2 focus:ring-brand-blue mt-3"></textarea>
+      </div>
+
       <div class="pt-4 text-center">
+        <p class="form-lead">
+          <span class="inline-block">最短1分、チェックするだけ。</span
+          ><span class="inline-block">「何から始めればいい？」という段階でも</span
+          ><span class="inline-block">大歓迎です。</span>
+        </p>
         <button type="submit" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
           無料デザイン診断
         </button>
@@ -810,7 +952,12 @@
   const formStatus = document.getElementById('form-status');
 
   if (contactForm) {
-    contactForm.querySelectorAll('input, textarea').forEach((field) => {
+    // 必須はこの3項目のみ。チェック項目・画像・自由記入欄はすべて任意。
+    const requiredFields = ['field-company', 'field-name', 'field-email']
+      .map((id) => document.getElementById(id))
+      .filter(Boolean);
+
+    requiredFields.forEach((field) => {
       field.addEventListener('input', () => {
         const errorEl = field.closest('div').querySelector('.field-error');
         if (field.checkValidity()) {
@@ -820,12 +967,181 @@
       });
     });
 
+    // --- チェック項目: 選択中の見た目を切り替える ---
+    contactForm.querySelectorAll('.check-item input[type="checkbox"]').forEach((box) => {
+      const toggle = () => box.closest('.check-item').classList.toggle('is-checked', box.checked);
+      box.addEventListener('change', toggle);
+      toggle();
+    });
+
+    // --- 画像添付: 最大3枚 / 送信前に自動縮小 ---
+    // 生地の質感や印刷の細部を確認できるよう、画質はできるだけ高く保つ。
+    // 合計容量の上限内で、枚数に応じて1枚あたりの持ち分を配分する
+    // (1枚だけなら、その1枚に容量を多く使える)。
+    const MAX_FILES = 3;
+    const BASE_EDGE = 2400;                  // 長辺の基準(これ以上は拡大しない)
+    const EDGE_STEPS = [2400, 2200, 2000, 1800, 1600];
+    const QUALITY_STEPS = [0.90, 0.88, 0.86, 0.84, 0.82, 0.78, 0.74];
+    // 添付の合計上限(実データ量)。送信経路の上限4.5MBに対し、
+    // 通信時の膨らみ(約1.33倍)を見込んでも余裕が残る値にしている。
+    const TOTAL_BUDGET = 2.8 * 1024 * 1024;
+
+    const fileInput = document.getElementById('field-images');
+    const previewWrap = document.getElementById('image-previews');
+    const imageMsg = document.getElementById('image-msg');
+    let picked = []; // { id, file, filename, base64, bytes, dataUrl, w, h, quality }
+    let imageSeq = 0;   // 取り消し時に対象を取り違えないための通し番号
+
+    const showMsg = (text, isError) => {
+      if (!text) { imageMsg.classList.add('hidden'); return; }
+      imageMsg.textContent = text;
+      imageMsg.classList.remove('hidden', 'is-error', 'is-info');
+      imageMsg.classList.add(isError ? 'is-error' : 'is-info');
+    };
+
+    const base64Bytes = (b64) => Math.ceil(b64.length * 3 / 4);
+    const toSize = (bytes) =>
+      bytes >= 1024 * 1024 ? `${(bytes / 1024 / 1024).toFixed(1)}MB` : `${Math.max(1, Math.round(bytes / 1024))}KB`;
+    const totalBytes = () => picked.reduce((sum, item) => sum + item.bytes, 0);
+
+    const loadImage = (file) => new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode failed')); };
+      img.src = url;
+    });
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const encode = (img, edge, quality) => {
+      const scale = Math.min(1, edge / Math.max(img.naturalWidth, img.naturalHeight));
+      const w = Math.max(1, Math.round(img.naturalWidth * scale));
+      const h = Math.max(1, Math.round(img.naturalHeight * scale));
+      canvas.width = w; canvas.height = h;
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, w, h);
+      ctx.drawImage(img, 0, 0, w, h);
+      const dataUrl = canvas.toDataURL('image/jpeg', quality);
+      const base64 = dataUrl.split(',')[1];
+      return { dataUrl, base64, bytes: base64Bytes(base64), w, h, quality };
+    };
+
+    // 持ち分に収まる範囲で、できるだけ大きく・高画質なものを選ぶ。
+    // まず長辺2400pxを保ったまま画質を下げ、それでも収まらなければ寸法を落とす。
+    const encodeWithinBudget = (img, budget) => {
+      let best = null;
+      for (const edge of EDGE_STEPS) {
+        for (const quality of QUALITY_STEPS) {
+          const out = encode(img, edge, quality);
+          if (out.bytes <= budget) return out;
+          if (!best || out.bytes < best.bytes) best = out;
+        }
+      }
+      return best; // どうしても収まらない場合は、いちばん小さくなったもの
+    };
+
+    // 枚数が変わると1枚あたりの持ち分も変わるため、毎回すべて作り直す
+    const rebuild = async () => {
+      let budget = Math.floor(TOTAL_BUDGET / Math.max(1, picked.length));
+      for (let attempt = 0; attempt < 3; attempt++) {
+        for (const item of picked) {
+          const img = await loadImage(item.file);
+          Object.assign(item, encodeWithinBudget(img, budget));
+        }
+        if (totalBytes() <= TOTAL_BUDGET) break;
+        budget = Math.floor(budget * 0.8); // 合計が超えたときだけ、さらに段階的に小さくする
+      }
+    };
+
+    const renderThumbs = () => {
+      previewWrap.innerHTML = '';
+      picked.forEach((item) => {
+        const box = document.createElement('div');
+        box.className = 'thumb';
+        const img = document.createElement('img');
+        img.src = item.dataUrl;
+        img.alt = item.filename;
+        const remove = document.createElement('button');
+        remove.type = 'button';
+        remove.className = 'thumb-remove';
+        remove.setAttribute('aria-label', item.filename + ' を取り消す');
+        remove.textContent = '×';
+        remove.addEventListener('click', async () => {
+          // 並び順は削除のたびにずれるため、固有IDで対象を探す
+          const at = picked.findIndex((x) => x.id === item.id);
+          if (at === -1) return;
+          picked.splice(at, 1);
+          showMsg('画像を調整しています…', false);
+          await rebuild();          // 残りの画像に容量を配分し直す
+          renderThumbs();
+          showMsg(picked.length ? summary() : '', false);
+        });
+        const name = document.createElement('p');
+        name.className = 'thumb-name';
+        name.textContent = item.filename;
+        box.append(img, remove, name);
+        previewWrap.appendChild(box);
+      });
+    };
+
+    const summary = () =>
+      `${picked.length}枚を添付します（合計 約${toSize(totalBytes())}／${picked.map((i) => `${i.w}×${i.h}px`).join('、')}）。`;
+
+    if (fileInput) {
+      fileInput.addEventListener('change', async () => {
+        const files = Array.from(fileInput.files || []);
+        fileInput.value = ''; // 同じ写真を選び直せるようにする
+        if (!files.length) return;
+
+        if (picked.length >= MAX_FILES) {
+          showMsg(`画像は${MAX_FILES}枚までです。追加するには、いま選んでいる画像を取り消してください。`, true);
+          return;
+        }
+
+        showMsg('画像を読み込んでいます…', false);
+        let skippedType = 0;   // 画像ではない
+        let skippedCount = 0;  // 3枚の上限を超えた
+        let skippedBroken = 0; // 読み込めなかった
+
+        for (const file of files) {
+          if (picked.length >= MAX_FILES) { skippedCount++; continue; }
+          if (!file.type.startsWith('image/')) { skippedType++; continue; }
+          try {
+            await loadImage(file); // ここで読めるかどうかだけ確認する
+            picked.push({
+              id: ++imageSeq,
+              file,
+              filename: file.name.replace(/\.[^.]+$/, '').slice(0, 40) + '.jpg',
+              bytes: 0,
+            });
+          } catch {
+            skippedBroken++;
+          }
+        }
+
+        await rebuild();
+        renderThumbs();
+
+        const notes = [];
+        if (picked.length) notes.push(summary());
+        if (skippedType) notes.push(`画像ではないファイルが${skippedType}件あったため、除きました。`);
+        if (skippedBroken) notes.push(`読み込めない形式の画像が${skippedBroken}件あったため、除きました。別の画像でお試しください。`);
+        if (skippedCount) notes.push(`画像は${MAX_FILES}枚までのため、${skippedCount}件は追加できませんでした。`);
+        showMsg(notes.join(' '), Boolean(skippedType || skippedCount || skippedBroken));
+      });
+    }
+
+
+    const checkedValues = (name) =>
+      Array.from(contactForm.querySelectorAll(`input[name="${name}"]:checked`)).map((el) => el.value);
+
     contactForm.addEventListener('submit', (e) => {
       e.preventDefault();
       let isValid = true;
       let firstInvalid = null;
 
-      contactForm.querySelectorAll('input, textarea').forEach((field) => {
+      requiredFields.forEach((field) => {
         const errorEl = field.closest('div').querySelector('.field-error');
         if (!field.checkValidity()) {
           isValid = false;
@@ -855,7 +1171,11 @@
         company: contactForm.querySelector('#field-company').value.trim(),
         name: contactForm.querySelector('#field-name').value.trim(),
         email: contactForm.querySelector('#field-email').value.trim(),
-        message: contactForm.querySelector('#field-message').value.trim(),
+        past: checkedValues('past'),
+        future: checkedValues('future'),
+        detail: contactForm.querySelector('#field-detail').value.trim(),
+        request: contactForm.querySelector('#field-request').value.trim(),
+        images: picked.map((item) => ({ filename: item.filename, content: item.base64 })),
       };
 
       fetch('/api/contact', {
