@@ -21,7 +21,14 @@
 <style>
   html { scroll-behavior: smooth; }
   body { color: #1E293B; }
-  #contact { scroll-margin-top: 90px; }
+  /* ページ内リンクの着地位置。固定ヘッダーの下に見出しが隠れないよう余白を確保する */
+  #contact,
+  #strength,
+  #works,
+  #voice,
+  #flow,
+  #plan,
+  #faq { scroll-margin-top: 90px; }
 
   /* ===== Section background gradient (Yellow -> White -> Light Blue, left to right) ===== */
   .bg-section-gradient {
@@ -497,7 +504,7 @@
 </section>
 
 <!-- ==================== ④b 解決策・強み(6つのポイント) ==================== -->
-<section class="bg-section-gradient py-16 md:py-20 px-5">
+<section id="strength" class="bg-section-gradient py-16 md:py-20 px-5">
   <div class="max-w-[1080px] mx-auto text-center">
     <h3 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-6 leading-[1.5]">
       大手代理店の「安心感」と、隣にいる「距離感」
@@ -546,7 +553,7 @@
 </section>
 
 <!-- ==================== ⑤ 制作実績(ギャラリー) ==================== -->
-<section class="bg-white py-16 md:py-20 px-5">
+<section id="works" class="bg-white py-16 md:py-20 px-5">
   <div class="max-w-[1080px] mx-auto">
     <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-2">過去の制作実績</h2>
     <p class="fade-up text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-10 md:mb-12">DESIGN WORKS</p>
@@ -620,7 +627,7 @@
 </section>
 
 <!-- ==================== ⑥ クライアントの声(事例・口コミ) ==================== -->
-<section class="bg-section-gradient py-16 md:py-20 px-5">
+<section id="voice" class="bg-section-gradient py-16 md:py-20 px-5">
   <div class="max-w-[1080px] mx-auto text-center">
     <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-4">クライアント様の声</h2>
     <div class="fade-up text-sm md:text-base font-bold text-brand-navy mb-14 md:mb-16 leading-[1.8]">
@@ -662,7 +669,7 @@
 </section>
 
 <!-- ==================== ⑦ 制作の流れ(ステップ) ==================== -->
-<section class="bg-white py-16 md:py-20 px-5">
+<section id="flow" class="bg-white py-16 md:py-20 px-5">
   <div class="max-w-[1080px] mx-auto text-center">
     <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy mb-2">コンセプトの解剖から製造まで</h2>
     <p class="fade-up text-sm md:text-base font-bold text-brand-navy mb-10 md:mb-14">代表直接の伴走だから、話が早くてブレがない</p>
@@ -709,7 +716,7 @@
 </section>
 
 <!-- ==================== ⑧ 料金プラン ==================== -->
-<section class="bg-white pb-16 md:pb-20 px-5">
+<section id="plan" class="bg-white pb-16 md:pb-20 px-5">
   <div class="max-w-[1080px] mx-auto text-center">
     <div class="fade-up info-card p-6 md:p-10">
       <h2 class="text-2xl md:text-[28px] font-bold text-brand-navy mb-3">選べる3つのプラン</h2>
@@ -755,7 +762,7 @@
 </section>
 
 <!-- ==================== ⑨ よくある質問(FAQ) ==================== -->
-<section class="bg-section-gradient py-16 md:py-20 px-5">
+<section id="faq" class="bg-section-gradient py-16 md:py-20 px-5">
   <div class="max-w-[1080px] mx-auto">
     <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-10 md:mb-14">よくある質問</h2>
 
@@ -936,6 +943,35 @@
 
 <script>
   // Fade-up on scroll
+  // ===== 外部から開いたときに、該当セクションまで確実に移動させる =====
+  // ・?s=plan 形式: Google広告に登録済みのサイトリンク用(URLを変更せずに済むようにする)
+  // ・#contact 形式: 通常のページ内リンク用
+  // どちらも、上にある画像や動画が読み込まれると高さが変わって着地点がずれるため、
+  // 読み込みが進むたびに位置を合わせ直す。
+  (() => {
+    const key =
+      new URLSearchParams(location.search).get('s') ||
+      (location.hash ? decodeURIComponent(location.hash.slice(1)) : '');
+    if (!key) return;
+    const target = document.getElementById(key);
+    if (!target) return; // 知らない値が来ても、何もせずページ先頭のままにする
+
+    // 訪問者が自分で操作を始めたら、以降の自動移動はやめる
+    let userMoved = false;
+    ['wheel', 'touchstart', 'keydown', 'click'].forEach((ev) =>
+      window.addEventListener(ev, () => { userMoved = true; }, { once: true, passive: true })
+    );
+
+    const go = () => { if (!userMoved) target.scrollIntoView({ behavior: 'auto', block: 'start' }); };
+    go();
+    window.addEventListener('load', go);
+    [200, 600, 1200, 2000, 3000].forEach((ms) => setTimeout(go, ms));
+    // 各画像の読み込み完了ごとにも位置を直す(回線が遅い端末ほど効く)
+    document.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) img.addEventListener('load', go, { once: true });
+    });
+  })();
+
   const fadeEls = document.querySelectorAll('.fade-up');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
