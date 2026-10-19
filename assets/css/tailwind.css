@@ -10,3 +10,17 @@
 /* 追加分: フッター拡張(プライバシーポリシー対応)で使用 */
 .py-10{padding-top:2.5rem;padding-bottom:2.5rem}
 @media (min-width: 768px){.md\:py-12{padding-top:3rem;padding-bottom:3rem}}
+
+/* 追加分: 制作実績ギャラリー(新規セクション)で使用 */
+.mt-8{margin-top:2rem}
+.pb-12{padding-bottom:3rem}
+.px-6{padding-left:1.5rem;padding-right:1.5rem}
+@media (min-width: 768px){
+.md\:mt-6{margin-top:1.5rem}
+.md\:mt-10{margin-top:2.5rem}
+.md\:mt-12{margin-top:3rem}
+.md\:pt-16{padding-top:4rem}
+.md\:pb-16{padding-bottom:4rem}
+.md\:px-8{padding-left:2rem;padding-right:2rem}
+.md\:py-4{padding-top:1rem;padding-bottom:1rem}
+}

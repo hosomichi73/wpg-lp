@@ -171,6 +171,87 @@
     .stat-label { font-size: 14px; }
   }
 
+  /* ===== 制作実績ギャラリー(新規) =====
+     ②c の追加セクション専用。セクションごと削除する場合は、この塊も併せて削除する。 */
+  .wg-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  @media (min-width: 768px) { .wg-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+  .wg-tile {
+    display: block; width: 100%; padding: 0;
+    border: 1px solid #E2E8F0; border-radius: 10px;
+    background-color: #FFFFFF; overflow: hidden; cursor: pointer;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .wg-tile:hover { border-color: #589DF2; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+  .wg-tile img {
+    display: block; width: 100%; height: 145px;
+    object-fit: contain; background-color: #FFFFFF;
+  }
+  @media (min-width: 768px) { .wg-tile img { height: 210px; } }
+  /* ラベルは全タイル共通で1行分の高さに固定する */
+  .wg-label {
+    height: 26px; line-height: 26px;
+    padding: 0 4px;
+    font-size: 10px; font-weight: 700; color: #1E293B;
+    text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    border-top: 1px solid #F1F5F9;
+  }
+  @media (min-width: 768px) { .wg-label { height: 30px; line-height: 30px; font-size: 13px; } }
+  .wg-toggle {
+    display: inline-block;
+    border: 1px solid #1E293B; border-radius: 9999px;
+    padding: 10px 24px;
+    font-size: 13px; font-weight: 700; color: #1E293B;
+    background-color: #FFFFFF; cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  .wg-toggle:hover { background-color: #1E293B; color: #FFFFFF; }
+  @media (min-width: 768px) { .wg-toggle { font-size: 15px; padding: 12px 32px; } }
+  .wg-cat {
+    font-size: 15px; font-weight: 700; color: #1E293B;
+    border-left: 4px solid #589DF2; padding-left: 10px;
+    margin: 24px 0 10px;
+  }
+  .wg-cat span { font-size: 12px; font-weight: 700; color: rgba(30,41,59,0.6); margin-left: 8px; letter-spacing: 0.08em; }
+  .wg-clients {
+    font-size: 12px; line-height: 2; color: #334155; text-align: center;
+    max-width: 820px; margin: 0 auto;
+  }
+  @media (min-width: 768px) { .wg-clients { font-size: 13px; } }
+  /* 拡大表示 */
+  .wg-modal {
+    position: fixed; inset: 0; z-index: 60;
+    background-color: rgba(15, 23, 42, 0.9);
+    display: flex; align-items: center; justify-content: center;
+    padding: 16px;
+  }
+  /* 余白は要素ごとの margin ではなく gap で持たせる。
+     説明文を非表示にしても余白が消えず、表示しても二重にならない。 */
+  .wg-modal-inner {
+    max-width: 900px; width: 100%; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 16px;
+  }
+  @media (min-width: 768px) { .wg-modal-inner { gap: 20px; } }
+  .wg-modal img {
+    display: block; width: 100%; max-height: 68vh;
+    object-fit: contain; border-radius: 10px; background-color: #FFFFFF;
+  }
+  .wg-modal-cap {
+    margin: 0; max-width: 640px;
+    font-size: 12px; line-height: 1.8; font-weight: 700; color: #FFFFFF;
+  }
+  @media (min-width: 768px) { .wg-modal-cap { font-size: 14px; } }
+  .wg-modal-close {
+    position: absolute; top: 12px; right: 14px;
+    width: 40px; height: 40px; border-radius: 9999px;
+    background-color: rgba(255,255,255,0.15); color: #FFFFFF;
+    font-size: 22px; line-height: 1; cursor: pointer; border: 0;
+  }
+  .wg-modal-close:hover { background-color: rgba(255,255,255,0.3); }
+  /* btn-cta の <a> は既定が inline で、上下の余白が行の高さに算入されない。
+     拡大表示の中でも重なりが起きないよう、ブロック扱いにしておく。 */
+  #wg-modal-cta { display: inline-block; }
+
   /* ===== フォーム: グループ見出し・チェック項目 ===== */
   .form-block { border-top: 1px solid #E2E8F0; padding-top: 24px; }
   .form-legend { font-size: 15px; font-weight: 700; line-height: 1.6; color: #1E293B; }
@@ -429,6 +510,66 @@
     ></video>
   </div>
 </section>
+
+<!-- ==================== ②c 制作実績(新規・追加ブロック) ====================
+     このブロックは独立しており、<section> ごと削除すれば完全に元へ戻ります。
+     専用スタイルは <style> 内の「制作実績ギャラリー(新規)」に、
+     専用スクリプトは </body> 直前の該当ブロックにまとまっています。 -->
+<section id="works-gallery" class="bg-white pt-12 pb-12 md:pt-16 md:pb-16 px-5">
+  <div class="max-w-[1080px] mx-auto">
+    <h2 class="fade-up text-2xl md:text-[28px] font-bold text-brand-navy text-center mb-1">制作実績</h2>
+    <p class="fade-up text-sm md:text-base font-bold text-brand-navy/70 text-center tracking-widest mb-4 md:mb-8">DESIGN WORKS</p>
+
+    <!-- 最初に見せる6点。
+         JavaScriptが動かない場合でも表示されるよう、ここに直接書いている。
+         差し替えは </body> 直前の FEATURED 配列を書き換えれば反映される
+         (スクリプトが読み込み時に配列の内容でここを上書きする)。 -->
+    <div id="wg-featured" class="wg-grid wg-grid-featured">
+      <button type="button" class="wg-tile"><img src="assets/works/a1-01.jpg" alt="アパレルTシャツ"><p class="wg-label">アパレルTシャツ</p></button>
+      <button type="button" class="wg-tile"><img src="assets/works/a2-01.jpg" alt="アパレルTシャツ"><p class="wg-label">アパレルTシャツ</p></button>
+      <button type="button" class="wg-tile"><img src="assets/works/goods-03.jpg" alt="アーティストライブグッズ"><p class="wg-label">アーティストライブグッズ</p></button>
+      <button type="button" class="wg-tile"><img src="assets/works/goods-12.jpg" alt="アーティストオリジナルグッズ"><p class="wg-label">アーティストオリジナルグッズ</p></button>
+      <button type="button" class="wg-tile"><img src="assets/works/goods-16.jpg" alt="アーティストキャラクターグッズ"><p class="wg-label">アーティストキャラクターグッズ</p></button>
+      <button type="button" class="wg-tile"><img src="assets/works/logo-06.jpg" alt="オリジナルロゴデザイン"><p class="wg-label">オリジナルロゴデザイン</p></button>
+    </div>
+
+    <div class="text-center mt-4 md:mt-6">
+      <button type="button" id="wg-toggle" class="wg-toggle" aria-expanded="false" aria-controls="wg-more">
+        すべての実績を見る（＋37点）
+      </button>
+    </div>
+
+    <!-- 展開部(閉じている間は画像を1枚も読み込まない) -->
+    <div id="wg-more" class="hidden mt-8 md:mt-10"></div>
+
+    <!-- 取引先企業名 -->
+    <div class="fade-up mt-10 md:mt-12">
+      <h3 class="text-base md:text-lg font-bold text-brand-navy text-center mb-4">これまでご一緒したみなさま（一部）</h3>
+      <p class="wg-clients">集英社／小学館／角川書店／任天堂／NTTグループ／毎日新聞／電通／博報堂／JR東日本企画／マイクロソフト／資生堂／東宝／テイチク／エイベックスグループ／ユニバーサル／ポニーキャニオン／ソニーミュージック／KINGレコード／株式会社アップフロントグループ／東映株式会社／トレジャーズ株式会社</p>
+    </div>
+
+    <!-- 既存セクションと同じく flex で包む。
+         btn-cta の <a> は既定が inline のため、包まずに置くと上下の余白が
+         行の高さに算入されず、直前のクライアント名に重なってしまう。 -->
+    <div class="flex items-center justify-center mt-10 md:mt-12">
+      <a href="#contact" class="btn-cta text-white text-base md:text-lg font-bold px-8 py-4 md:px-12 md:py-5">
+        無料デザイン診断を受ける →
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- 画像拡大モーダル(上の制作実績セクション専用) -->
+<div id="wg-modal" class="wg-modal hidden" role="dialog" aria-modal="true" aria-label="制作実績の拡大表示">
+  <button type="button" class="wg-modal-close" id="wg-modal-close" aria-label="閉じる">×</button>
+  <div class="wg-modal-inner">
+    <img id="wg-modal-img" src="" alt="">
+    <p id="wg-modal-cap" class="wg-modal-cap"></p>
+    <a href="#contact" id="wg-modal-cta" class="btn-cta text-white text-sm md:text-base font-bold px-6 py-3 md:px-8 md:py-4">
+      無料デザイン診断を受ける →
+    </a>
+  </div>
+</div>
 
 <!-- ==================== ③ 課題提起(ペルソナ共感) ==================== -->
 <section class="bg-white pt-16 pb-16 md:pt-20 md:pb-20 px-5">
@@ -1240,6 +1381,147 @@
         });
     });
   }
+</script>
+
+<!-- ==================== ②c 制作実績ギャラリー 制御スクリプト(新規) ====================
+     上の #works-gallery セクション専用。セクションを削除する場合は、この <script> も削除する。 -->
+<script>
+(() => {
+  const root = document.getElementById('works-gallery');
+  if (!root) return;
+
+  const DIR = 'assets/works/';
+
+  // ▼ 最初に表示する6点。ここを書き換えるだけで入れ替えられる
+  //    file: ファイル名 / label: 画像下のラベル / note: 拡大時の説明文(無ければ空)
+  const FEATURED = [
+    { file: 'a1-01.jpg',    label: 'アパレルTシャツ',            note: '"what\'s going on" サステナブル素材で創られたオールハンドメイドプリント' },
+    { file: 'a2-01.jpg',    label: 'アパレルTシャツ',            note: '"8EAR HUG" オリジナルボディ＆プリント' },
+    { file: 'goods-03.jpg', label: 'アーティストライブグッズ',      note: '' },
+    { file: 'goods-12.jpg', label: 'アーティストオリジナルグッズ',  note: '' },
+    { file: 'goods-16.jpg', label: 'アーティストキャラクターグッズ', note: '' },
+    { file: 'logo-06.jpg',  label: 'オリジナルロゴデザイン',       note: '' },
+  ];
+
+  // ▼ 展開部。カテゴリ見出しと、その中に並べるファイル
+  const pad = (n) => String(n).padStart(2, '0');
+  const MORE = [
+    { jp: 'アパレル', en: 'APPAREL', files: [
+        ...Array.from({ length: 7 }, (_, i) => `a1-${pad(i + 2)}.jpg`),
+        ...Array.from({ length: 3 }, (_, i) => `a2-${pad(i + 2)}.jpg`),
+      ] },
+    { jp: 'グッズ', en: 'GOODS', files:
+        Array.from({ length: 21 }, (_, i) => `goods-${pad(i + 1)}.jpg`)
+          .filter((f) => !['goods-03.jpg', 'goods-12.jpg', 'goods-16.jpg'].includes(f)) },
+    { jp: '衣装', en: 'COSTUME', files:
+        Array.from({ length: 4 }, (_, i) => `costume-${pad(i + 1)}.jpg`) },
+    { jp: 'ロゴ・キャラクター', en: 'LOGO / CHARACTER', files:
+        Array.from({ length: 6 }, (_, i) => `logo-${pad(i + 1)}.jpg`)
+          .filter((f) => f !== 'logo-06.jpg') },
+  ];
+
+  const notes = new Map(FEATURED.filter((x) => x.note).map((x) => [x.file, x.note]));
+
+  // 展開部のタイルを作る(こちらは開いたときに生成する)
+  const makeTile = (file, label, lazy) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'wg-tile';
+    const img = document.createElement('img');
+    img.src = DIR + file;
+    img.alt = label || '制作実績';
+    if (lazy) img.loading = 'lazy';
+    btn.appendChild(img);
+    if (label) {
+      const p = document.createElement('p');
+      p.className = 'wg-label';
+      p.textContent = label;
+      btn.appendChild(p);
+    }
+    btn.addEventListener('click', () => openModal(file, label));
+    return btn;
+  };
+
+  // --- 最初の6点 ---
+  // タイルはHTMLに直接書いてあるので、ここでは作らない。
+  // (JavaScriptが止まっても6点が表示されたままになる)
+  // FEATURED 配列の内容でHTML側を上書きし、差し替えは配列1箇所で済むようにする。
+  const featuredTiles = [...document.querySelectorAll('#wg-featured .wg-tile')];
+  featuredTiles.forEach((tile, idx) => {
+    const item = FEATURED[idx];
+    if (!item) { tile.remove(); return; }
+    const img = tile.querySelector('img');
+    const label = tile.querySelector('.wg-label');
+    if (img) {
+      if (img.getAttribute('src') !== DIR + item.file) img.src = DIR + item.file;
+      img.alt = item.label || '制作実績';
+    }
+    if (label) label.textContent = item.label;
+    tile.addEventListener('click', () => openModal(item.file, item.label));
+  });
+
+  // --- 展開部(ボタンを押すまで中身を作らない = 画像を読み込まない) ---
+  const moreWrap = document.getElementById('wg-more');
+  const toggle = document.getElementById('wg-toggle');
+  let built = false;
+  const build = () => {
+    if (built) return;
+    MORE.forEach((cat) => {
+      const h = document.createElement('h3');
+      h.className = 'wg-cat';
+      h.textContent = cat.en;
+      const sp = document.createElement('span');
+      sp.textContent = cat.jp;
+      h.appendChild(sp);
+      moreWrap.appendChild(h);
+      const grid = document.createElement('div');
+      grid.className = 'wg-grid';
+      cat.files.forEach((f) => grid.appendChild(makeTile(f, '', true)));
+      moreWrap.appendChild(grid);
+    });
+    built = true;
+  };
+
+  toggle.addEventListener('click', () => {
+    const open = moreWrap.classList.contains('hidden');
+    if (open) build();
+    moreWrap.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.textContent = open ? '閉じる' : 'すべての実績を見る（＋37点）';
+  });
+
+  // --- 拡大表示(同じページ内。閉じたら元のスクロール位置へ戻す) ---
+  const modal = document.getElementById('wg-modal');
+  const modalImg = document.getElementById('wg-modal-img');
+  const modalCap = document.getElementById('wg-modal-cap');
+  let savedY = 0;
+
+  function openModal(file, label) {
+    savedY = window.scrollY;
+    modalImg.src = DIR + file;
+    modalImg.alt = label || '制作実績';
+    const note = notes.get(file) || '';
+    modalCap.textContent = note;
+    modalCap.style.display = note ? '' : 'none';
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modal.classList.add('hidden');
+    modalImg.src = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, savedY); // 見ていた位置に正確に戻す
+  }
+
+  document.getElementById('wg-modal-close').addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+  });
+  // モーダル内のCTAは、閉じてからフォームへ移動する
+  document.getElementById('wg-modal-cta').addEventListener('click', closeModal);
+})();
 </script>
 
 </body>
