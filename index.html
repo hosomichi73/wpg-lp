@@ -962,9 +962,8 @@
     <form id="contact-form" novalidate class="fade-up space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label for="field-company" class="block text-sm md:text-base font-bold text-brand-navy mb-2">会社名[必須]</label>
-          <input id="field-company" name="company" type="text" required class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
-          <p class="field-error hidden text-xs text-red-600 mt-1">会社名をご入力ください。</p>
+          <label for="field-company" class="block text-sm md:text-base font-bold text-brand-navy mb-2">会社名・活動名（任意）</label>
+          <input id="field-company" name="company" type="text" class="w-full rounded-xl border border-brand-navy px-4 py-3 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-brand-blue">
         </div>
         <div>
           <label for="field-name" class="block text-sm md:text-base font-bold text-brand-navy mb-2">ご担当者様氏名[必須]</label>
@@ -1133,8 +1132,9 @@
   const formStatus = document.getElementById('form-status');
 
   if (contactForm) {
-    // 必須はこの3項目のみ。チェック項目・画像・自由記入欄はすべて任意。
-    const requiredFields = ['field-company', 'field-name', 'field-email']
+    // 必須はこの2項目のみ。会社名・チェック項目・画像・自由記入欄はすべて任意。
+    // (会社名を持たない個人の方でも送信できるようにするため)
+    const requiredFields = ['field-name', 'field-email']
       .map((id) => document.getElementById(id))
       .filter(Boolean);
 
