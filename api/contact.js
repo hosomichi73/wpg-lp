@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
   const name = (body?.name || '').toString().trim();
   const email = (body?.email || '').toString().trim();
 
-  // 必須はこの3項目のみ。以下はすべて任意。
+  // 必須は氏名とメールアドレスのみ。会社名を含め、以下はすべて任意。
   const detail = (body?.detail || '').toString().trim();
   const request = (body?.request || '').toString().trim();
   const toList = (value) =>
@@ -86,7 +86,7 @@ module.exports = async (req, res) => {
   const past = toList(body?.past);
   const future = toList(body?.future);
 
-  if (!company || !name || !email) {
+  if (!name || !email) {
     return res.status(400).json({ error: '必須項目が入力されていません。' });
   }
 
@@ -119,7 +119,7 @@ module.exports = async (req, res) => {
     <div style="font-family:sans-serif;line-height:1.7;color:#1e293b;">
       <h2 style="font-size:17px;">無料デザイン診断フォームからのお問い合わせ</h2>
       <table style="border-collapse:collapse;">
-        <tr><td style="padding:2px 12px 2px 0;"><strong>会社名</strong></td><td>${escapeHtml(company)}</td></tr>
+        <tr><td style="padding:2px 12px 2px 0;"><strong>会社名・活動名</strong></td><td>${company ? escapeHtml(company) : '<span style="color:#64748b;">（未記入）</span>'}</td></tr>
         <tr><td style="padding:2px 12px 2px 0;"><strong>ご担当者様氏名</strong></td><td>${escapeHtml(name)}</td></tr>
         <tr><td style="padding:2px 12px 2px 0;"><strong>メールアドレス</strong></td><td>${escapeHtml(email)}</td></tr>
       </table>
@@ -146,7 +146,7 @@ module.exports = async (req, res) => {
       from: FROM_ADDRESS,
       to: recipients,
       reply_to: email,
-      subject: `【無料デザイン診断】${company} 様よりお問い合わせ`,
+      subject: `【無料デザイン診断】${company || name} 様よりお問い合わせ`,
       html,
     };
     if (attachments.length) payload.attachments = attachments;
